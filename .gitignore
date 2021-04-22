@@ -37,3 +37,5 @@ npm-debug.log
 .envrc
 postgres/
 postgres_data/
+/priv/plts/*.plt
+/priv/plts/*.plt.hash
