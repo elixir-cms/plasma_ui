@@ -1,0 +1,3 @@
+.envrc
+postgres/
+postgres_data/
