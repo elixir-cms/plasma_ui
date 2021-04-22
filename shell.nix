@@ -20,7 +20,10 @@ mkShell {
     if [ ! -d $PGDATA ]; then
       echo 'Initializing postgresql database...'
       initdb $PGDATA --auth=trust >/dev/null
+      pg_ctl start -l $LOG_PATH -o "-c listen_addresses= -c unix_socket_directories=$PGHOST"
+      psql -c "create role postgres with createdb login password 'postgres';"
+    else
+      pg_ctl start -l $LOG_PATH -o "-c listen_addresses= -c unix_socket_directories=$PGHOST"
     fi
-    pg_ctl start -l $LOG_PATH -o "-c listen_addresses= -c unix_socket_directories=$PGHOST"
   '';
 }
