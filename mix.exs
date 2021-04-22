@@ -25,7 +25,17 @@ defmodule PlasmaUi.MixProject do
     ]
   end
 
+  def catalogues do
+    [
+      # Local catalogue
+      "priv/catalogue",
+      # Dependencies catalogues
+      "deps/surface/priv/catalogue"
+    ]
+  end
+
   # Specifies which paths to compile per environment.
+  defp elixirc_paths(:dev), do: ["lib"] ++ catalogues()
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
 
@@ -49,7 +59,9 @@ defmodule PlasmaUi.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:surface, "~> 0.3.2"},
+      {:surface_catalogue, "~> 0.0.7", only: :dev}
     ]
   end
 

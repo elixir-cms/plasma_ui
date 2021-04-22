@@ -1,5 +1,6 @@
 defmodule PlasmaUiWeb.Router do
   use PlasmaUiWeb, :router
+  import Surface.Catalogue.Router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -37,6 +38,7 @@ defmodule PlasmaUiWeb.Router do
 
     scope "/" do
       pipe_through :browser
+      surface_catalogue("/catalogue")
       live_dashboard "/dashboard", metrics: PlasmaUiWeb.Telemetry
     end
   end
