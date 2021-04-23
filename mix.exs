@@ -21,14 +21,14 @@ defmodule PlasmaUi.MixProject do
   def application do
     [
       mod: {PlasmaUi.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :telemetry]
     ]
   end
 
   def catalogues do
     [
       # Local catalogue
-      "priv/catalogue",
+      "lib/plasma_ui/catalogue",
       # Dependencies catalogues
       "deps/surface/priv/catalogue"
     ]
@@ -51,7 +51,7 @@ defmodule PlasmaUi.MixProject do
       {:phoenix_live_view, "~> 0.15.1"},
       {:floki, ">= 0.27.0", only: :test},
       {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_reload, "~> 1.2", only: [:dev, :test]},
       {:phoenix_live_dashboard, "~> 0.4"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
@@ -61,7 +61,7 @@ defmodule PlasmaUi.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:surface, "~> 0.3.2"},
-      {:surface_catalogue, "~> 0.0.7", only: :dev}
+      {:surface_catalogue, "~> 0.0.7", only: [:dev, :test]}
     ]
   end
 
