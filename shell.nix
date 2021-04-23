@@ -14,16 +14,7 @@ mkShell {
     yarn
   ];
   shellHook = ''
-    if [ ! -d $PGHOST ]; then
-      mkdir -p $PGHOST
-    fi
-    if [ ! -d $PGDATA ]; then
-      echo 'Initializing postgresql database...'
-      initdb $PGDATA --auth=trust >/dev/null
-      pg_ctl start -l $LOG_PATH -o "-c listen_addresses= -c unix_socket_directories=$PGHOST"
-      psql -c "create role postgres with createdb login password 'postgres';"
-    else
-      pg_ctl start -l $LOG_PATH -o "-c listen_addresses= -c unix_socket_directories=$PGHOST"
-    fi
+    ./postgres-local.sh start
+    trap "./postgres-local.sh stop" EXIT
   '';
 }
