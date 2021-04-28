@@ -5,7 +5,7 @@ defmodule PlasmaUi.MixProject do
     [
       app: :plasma_ui,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.11",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -30,7 +30,8 @@ defmodule PlasmaUi.MixProject do
       # Local catalogue
       "lib/plasma_ui/catalogue",
       # Dependencies catalogues
-      "deps/surface/priv/catalogue"
+      # "deps/surface/priv/catalogue",
+      "deps/surface_bootstrap/priv/catalogue"
     ]
   end
 
@@ -61,6 +62,7 @@ defmodule PlasmaUi.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:surface, "~> 0.3.2"},
+      {:surface_bootstrap, "~> 0.1.1", override: true},
       {:surface_catalogue, "~> 0.0.7", only: [:dev, :test]}
     ]
   end
