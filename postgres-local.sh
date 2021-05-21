@@ -10,10 +10,12 @@ if [ $1 == "start" ]; then
         echo 'Initializing postgres database'
         initdb $PGDATA --auth=trust >/dev/null
         echo 'Starting postgres'
+        chmod -R 0700 $PGDATA
         pg_ctl start -l $LOG_PATH -o "-c listen_addresses= -c unix_socket_directories=$PGHOST"
         psql -c "create role postgres with createdb login password 'postgres';"
     else
         echo 'Starting postgres'
+        chmod -R 0700 $PGDATA
         pg_ctl start -l $LOG_PATH -o "-c listen_addresses= -c unix_socket_directories=$PGHOST"
     fi
 fi

@@ -30,8 +30,7 @@ defmodule PlasmaUi.MixProject do
       # Local catalogue
       "lib/plasma_ui/catalogue",
       # Dependencies catalogues
-      # "deps/surface/priv/catalogue",
-      "deps/surface_bootstrap/priv/catalogue"
+      "deps/surface/priv/catalogue"
     ]
   end
 
@@ -61,9 +60,9 @@ defmodule PlasmaUi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:surface, "~> 0.3.2"},
-      {:surface_bootstrap, "~> 0.1.1", override: true},
-      {:surface_catalogue, "~> 0.0.7", only: [:dev, :test]}
+      {:surface, "~> 0.4.0"},
+      {:surface_catalogue, "~> 0.0.8", only: [:dev, :test]},
+      {:surface_formatter, "~> 0.4.0"}
     ]
   end
 
@@ -78,6 +77,7 @@ defmodule PlasmaUi.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
+      format: ["format", "surface.format"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
