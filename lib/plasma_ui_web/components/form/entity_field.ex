@@ -38,7 +38,6 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
         <ValidationOptions parent_name={{ @name }} options={{ @field.validation_options }} />
       </Accordion>
     </fieldset>
-    <hr>
     """
   end
 end
