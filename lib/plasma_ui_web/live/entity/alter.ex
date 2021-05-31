@@ -1,88 +1,39 @@
 defmodule PlasmaUiWeb.Entity.Alter do
+  @moduledoc """
+  A liveview page that shows the alter entity form.
+  """
+
   use Surface.LiveView
   alias Surface.Components.Form
-  alias PlasmaUiWeb.Components.Form.EntityField
-  alias Surface.Components.Form.{Field, TextInput}
-
-  @details %{
-    "source" => "",
-    "label" => "",
-    "singular" => "",
-    "plural" => ""
-  }
-
-  @fields %{
-    example_text: %{
-      field_type: "text",
-      storage_type: "binary",
-      persistence_options: %{
-        nullable: false,
-        indexed: false,
-        unique: true,
-        default: "default"
-      },
-      validation_options: %{
-        required: true,
-        format: false,
-        number: false,
-        excluding: false,
-        including: false,
-        length: %{}
-      },
-      filters: [],
-      meta: %{},
-      value: ''
-    },
-    example_textarea: %{
-      field_type: "textarea",
-      storage_type: "binary",
-      persistence_options: %{
-        nullable: false,
-        indexed: false,
-        unique: true,
-        default: "default"
-      },
-      validation_options: %{
-        required: true,
-        format: false,
-        number: false,
-        excluding: false,
-        including: false,
-        length: %{}
-      },
-      filters: [],
-      meta: %{},
-      value: ''
-    }
-  }
+  alias PlasmaUiWeb.Components.Accordion
+  alias PlasmaUiWeb.Components.Form.{EntityDetails, EntityField}
+  alias PlasmaUiWeb.Helpers.Entity
 
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :entity, Map.merge(@details, %{fields: @fields}))}
+    entity = Map.merge(Entity.get_details(), %{fields: Entity.get_fields()})
+    {:ok, assign(socket, :entity, entity)}
   end
 
   def render(assigns) do
     ~H"""
-    <Form for={{ :entity }} change="change" opts={{ id: "entity" }}>
-      <Context put={{ entity: @entity }}>
-        <fieldset name="details">
-          <Field name="label">
-            <TextInput />
-          </Field>
-          <Field name="source">
-            <TextInput />
-          </Field>
-          <Field name="singular">
-            <TextInput />
-          </Field>
-          <Field name="plural">
-            <TextInput />
-          </Field>
-        </fieldset>
-        <fieldset form="entity" name="fields">
-          <EntityField :for={{ field_name <- Map.keys(@entity.fields) }} name={{ field_name }} />
-        </fieldset>
-      </Context>
-    </Form>
+    <section>
+      <h2>Alter Entity - {{ @entity.label }}</h2>
+      <article>
+        <p>Use this form to alter entity details and fields associated with the entity.</p>
+        <Form for={{ :entity }} change="change" opts={{ id: "entity" }}>
+          <EntityDetails entity={{ @entity }} />
+          <fieldset class="border" form="entity" name="entity[fields]">
+            <legend>Fields</legend>
+            <Accordion
+              :for={{ {field_name, field} <- Map.to_list(@entity.fields) }}
+              title={{ Phoenix.HTML.Form.humanize(field_name) }}
+            >
+              <EntityField field={{ field }} name={{ field_name }} />
+            </Accordion>
+          </fieldset>
+        </Form>
+      </article>
+    </section>
     """
   end
 
