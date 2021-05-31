@@ -12,6 +12,29 @@ defmodule PlasmaUiWeb.Helpers.Entity do
     }
   end
 
+  def get_entities() do
+    [
+      %{
+        source: "post",
+        label: "Post",
+        archived: false,
+        last_updated: DateTime.utc_now() |> DateTime.to_iso8601()
+      },
+      %{
+        source: "page",
+        label: "Page",
+        archived: false,
+        last_updated: DateTime.utc_now() |> DateTime.to_iso8601()
+      },
+      %{
+        source: "event",
+        label: "Event",
+        archived: false,
+        last_updated: DateTime.utc_now() |> DateTime.to_iso8601()
+      }
+    ]
+  end
+
   def get_fields() do
     %{
       example_text: %{
