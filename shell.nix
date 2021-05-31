@@ -5,8 +5,8 @@ with pkgs;
 mkShell {
   name = "elixirShell";
   buildInputs = [
-    erlangR23
-    pkgs.beam.packages.erlangR23.elixir
+    erlangR24
+    pkgs.beam.packages.erlangR24.elixir
     inotify-tools
     postgresql
     nodejs-12_x
