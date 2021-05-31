@@ -20,6 +20,7 @@ defmodule PlasmaUiWeb.Router do
 
     live "/", PageLive, :index
     live "/alter-entity", Entity.Alter
+    live "/entities", Entity.List
   end
 
   # Other scopes may use custom stacks.
