@@ -16,8 +16,10 @@ import 'phoenix_html'
 import { Socket } from 'phoenix'
 import topbar from 'topbar'
 import { LiveSocket } from 'phoenix_live_view'
-
 import Alpine from 'alpinejs'
+import '@fortawesome/fontawesome-free/js/all.min.js'
+import '@fortawesome/fontawesome-free/css/all.min.css'
+
 let csrfToken = document
     .querySelector("meta[name='csrf-token']")
     .getAttribute('content')
