@@ -31,14 +31,13 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
         prompt="Storage type"
         selected={{ @field.storage_type }}
       />
-      <Label text="Required Field?" />
+      <Label text="Standard Options" />
       <Checkbox
         id={{ "entity_fields_#{@name}_validation_options_required" }}
         name={{ "entity[fields][#{@name}][validation_options][required]" }}
         value={{ @field.validation_options.required }}
       />
-      <Label field={{ "fields_#{@name}_validation_options_required" }} text="Required" />
-      <Label text="Advanced" />
+      <Label field={{ "fields_#{@name}_validation_options_required" }} text="Required Field" />
       <br>
       <Checkbox
         id={{ "entity_fields_#{@name}_persistence_options_indexed" }}
@@ -46,6 +45,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
         value={{ @field.persistence_options.indexed }}
       />
       <Label field={{ "fields_#{@name}_persistence_options_indexed" }} text="Enable Sorting & Filtering" />
+      <Label text="Advanced Options" />
       <Accordion title="Persistence options">
         <PersistenceOptions parent_name={{ @name }} options={{ @field.persistence_options }} />
       </Accordion>
