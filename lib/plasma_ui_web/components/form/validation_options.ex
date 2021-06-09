@@ -14,12 +14,6 @@ defmodule PlasmaUiWeb.Components.Form.ValidationOptions do
     ~H"""
     <fieldset form="entity" name={{ "entity[fields][#{@parent_name}][validation_options]" }}>
       <legend>Validation options</legend>
-      <Checkbox
-        id={{ "entity_fields_#{@parent_name}_validation_options_required" }}
-        name={{ "entity[fields][#{@parent_name}][validation_options][required]" }}
-        value={{ @options.required }}
-      />
-      <Label field={{ "fields_#{@parent_name}_validation_options_required" }} text="Required" />
       <Label field={{ "fields_#{@parent_name}_validation_options_format" }} text="Format" />
       <TextInput
         id={{ "entity_fields_#{@parent_name}_validation_options_format" }}

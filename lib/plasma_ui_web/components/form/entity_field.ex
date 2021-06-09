@@ -5,7 +5,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
 
   use Surface.Component
   alias PlasmaUiWeb.Components.Accordion
-  alias Surface.Components.Form.{Label, TextInput, Select}
+  alias Surface.Components.Form.{Checkbox, Label, TextInput, Select}
   alias PlasmaUiWeb.Components.Form.{PersistenceOptions, ValidationOptions}
 
   prop name, :string, required: true
@@ -31,6 +31,13 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
         prompt="Storage type"
         selected={{ @field.storage_type }}
       />
+      <Label text="Required Field?" />
+      <Checkbox
+        id={{ "entity_fields_#{@name}_validation_options_required" }}
+        name={{ "entity[fields][#{@name}][validation_options][required]" }}
+        value={{ @field.validation_options.required }}
+      />
+      <Label field={{ "fields_#{@name}_validation_options_required" }} text="Required" />
       <Accordion title="Persistence options">
         <PersistenceOptions parent_name={{ @name }} options={{ @field.persistence_options }} />
       </Accordion>
