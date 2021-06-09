@@ -1,0 +1,23 @@
+* Entities
+** Make this the index route
+** The storage type, as discussed was misunderstood :) That is more like is this string a string or text in the migration (VARCHAR(200) or TEXT).
+** There aren't a lot of listing and filtering options I care about at the outset here. Just a bog-standard list of entities seems good.
+** Search filter and pager seems like enough to manage a large number of them.
+*** We could extend the use of meta information for the definition in the long run if we need more meta on our entity types.
+** I do like archive as an option. Especially since I'm considering whether a sidebar menu that always shows a nav menu of all your entity types would be a good thing. So you can get to creating content quickly. Then archive would be a way of removing old cruft from that list.
+** Is the gear the way to modifying the entity or can you press the name?
+* Alter Entity
+** Each changed field gets a yellow tilde to indicate modified, new ones get a green plus
+** Add button for "Save field changes" to trigger finalizing the migration and applying it under the hood
+** Make slugs and field/storage types unchangeable
+** Humanify the presentation of some options
+** have an expandable section for Constraints (gray out and explain if N/A because not first migration set) and one for Validation.
+** Under Validation you can dig into adding a list of validations of different types.
+*** Only show ones that apply for the field type too.
+** When creating a new field you should probably go through a small set of steps to generate the unchangeable things and then you can build it out with the rest
+* Create Entity
+** Almost identical to Alter Entity, but allows user to set slug and field/storage types
+* Settings
+** I'm guessing storage/failover storage are mostly thoughts about what kind of stuff could be in here which is fine.
+** Defaults is interesting, I don't think we should provide those right away.
+** Logging is definitely a good fit, especially for the standalone variant.
