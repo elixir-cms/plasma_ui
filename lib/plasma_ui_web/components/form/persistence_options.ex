@@ -29,13 +29,6 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <Label field={{ "fields_#{@parent_name}_persistence_options_nullable" }} text="Nullable" />
       <br>
       <Checkbox
-        id={{ "entity_fields_#{@parent_name}_persistence_options_indexed" }}
-        name={{ "entity[fields][#{@parent_name}][persistence_options][indexed]" }}
-        value={{ @options.indexed }}
-      />
-      <Label field={{ "fields_#{@parent_name}_persistence_options_indexed" }} text="Enable Sorting & Filtering" />
-      <br>
-      <Checkbox
         id={{ "entity_fields_#{@parent_name}_persistence_options_unique" }}
         name={{ "entity[fields][#{@parent_name}][persistence_options][unique]" }}
         value={{ @options.unique }}

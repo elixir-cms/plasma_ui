@@ -39,6 +39,13 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       />
       <Label field={{ "fields_#{@name}_validation_options_required" }} text="Required" />
       <Label text="Advanced" />
+      <br>
+      <Checkbox
+        id={{ "entity_fields_#{@name}_persistence_options_indexed" }}
+        name={{ "entity[fields][#{@name}][persistence_options][indexed]" }}
+        value={{ @field.persistence_options.indexed }}
+      />
+      <Label field={{ "fields_#{@name}_persistence_options_indexed" }} text="Enable Sorting & Filtering" />
       <Accordion title="Persistence options">
         <PersistenceOptions parent_name={{ @name }} options={{ @field.persistence_options }} />
       </Accordion>
