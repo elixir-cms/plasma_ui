@@ -38,6 +38,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
         value={{ @field.validation_options.required }}
       />
       <Label field={{ "fields_#{@name}_validation_options_required" }} text="Required" />
+      <Label text="Advanced" />
       <Accordion title="Persistence options">
         <PersistenceOptions parent_name={{ @name }} options={{ @field.persistence_options }} />
       </Accordion>
