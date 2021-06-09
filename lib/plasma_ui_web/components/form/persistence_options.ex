@@ -33,7 +33,7 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
         name={{ "entity[fields][#{@parent_name}][persistence_options][indexed]" }}
         value={{ @options.indexed }}
       />
-      <Label field={{ "fields_#{@parent_name}_persistence_options_indexed" }} text="Indexed" />
+      <Label field={{ "fields_#{@parent_name}_persistence_options_indexed" }} text="Enable Sorting & Filtering" />
       <br>
       <Checkbox
         id={{ "entity_fields_#{@parent_name}_persistence_options_unique" }}
