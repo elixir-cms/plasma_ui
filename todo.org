@@ -1,3 +1,6 @@
+* General
+** Create header with project mark, menu items, and github link
+** Create footer with project credits and github link
 * Entities
 ** Make this the index route
 ** The storage type, as discussed was misunderstood :) That is more like is this string a string or text in the migration (VARCHAR(200) or TEXT).
@@ -21,3 +24,4 @@
 ** I'm guessing storage/failover storage are mostly thoughts about what kind of stuff could be in here which is fine.
 ** Defaults is interesting, I don't think we should provide those right away.
 ** Logging is definitely a good fit, especially for the standalone variant.
+* Import/Export
