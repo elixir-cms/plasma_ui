@@ -1,10 +1,10 @@
 defmodule PlasmaUiWeb.PageLive do
   @moduledoc """
-  A page for landing on.
+  A test page to land on.
   """
 
   use Surface.LiveView
-  alias PlasmaUiWeb.Components.Accordion
+  alias PlasmaUiWeb.Components.Modal
 
   @impl true
   def mount(_params, _session, socket) do
@@ -15,10 +15,24 @@ defmodule PlasmaUiWeb.PageLive do
   def render(assigns) do
     ~H"""
     <section>
-      <Accordion title="Hello">
-        <p>Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros.</p>
-      </Accordion>
+      <Modal>
+        <template slot="trigger">
+          <div class="button">Add Field</div>
+        </template>
+        <template slot="content">
+          <h3>Modals Are Easy!</h3>
+          <p>Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros.</p>
+          <br>
+          <button onclick="alert('Hello World')">Greet Me</button>
+        </template>
+      </Modal>
     </section>
     """
+  end
+
+  @impl true
+  def handle_event("say_hello", _, socket) do
+    IO.puts("Hello!")
+    {:noreply, socket}
   end
 end
