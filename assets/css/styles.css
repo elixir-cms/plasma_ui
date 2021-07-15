@@ -1,16 +1,20 @@
 /* Layout */
 html { @apply bg-white }
 section { @apply container py-8 }
+
+/* Forms */
+form { margin-bottom: 0; }
 form > fieldset { @apply p-8 }
 fieldset legend { @apply text-3xl }
 fieldset.border > legend { @apply border-8 border-white -mb-3.5 -ml-3.5 }
+input[type="checkbox"] + label { @apply font-normal inline }
+
+/* Buttons */
+.button.gray { @apply bg-gray-400 border-gray-400 }
 
 /* Typography */
 h1, h2, h3 { @apply font-semibold }
 p { @apply mb-2 }
-
-/* Forms */
-input[type="checkbox"] + label { @apply font-normal inline }
 
 /* Components */
 .accordion { @apply flex items-center justify-between bg-gray-200 border p-4 cursor-pointer }
