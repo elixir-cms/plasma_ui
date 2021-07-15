@@ -12,6 +12,31 @@ defmodule PlasmaUiWeb.Helpers.Entity do
     }
   end
 
+  def get_new_field() do
+    %{
+      field_name: "",
+      field_type: "string",
+      storage_type: "string",
+      persistence_options: %{
+        primary_key: true,
+        nullable: false,
+        indexed: false,
+        unique: true,
+        default: "default"
+      },
+      validation_options: %{
+        required: true,
+        format: false,
+        number: false,
+        excluding: false,
+        including: false,
+        length: 5
+      },
+      filters: [],
+      meta: %{}
+    }
+  end
+
   def get_entities() do
     [
       %{
@@ -37,9 +62,9 @@ defmodule PlasmaUiWeb.Helpers.Entity do
 
   def get_fields() do
     %{
-      example_text: %{
-        field_type: "text",
-        storage_type: "binary",
+      "example_text" => %{
+        field_type: "string",
+        storage_type: "string",
         persistence_options: %{
           primary_key: true,
           nullable: false,
@@ -58,9 +83,9 @@ defmodule PlasmaUiWeb.Helpers.Entity do
         filters: [],
         meta: %{}
       },
-      example_textarea: %{
-        field_type: "textarea",
-        storage_type: "binary",
+      "example_textarea" => %{
+        field_type: "string",
+        storage_type: "string",
         persistence_options: %{
           primary_key: true,
           nullable: false,
