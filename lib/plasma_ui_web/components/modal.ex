@@ -29,7 +29,7 @@ defmodule PlasmaUiWeb.Components.Modal do
           x-transition:leave="transition ease-in duration-200"
           x-transition:leave-start="opacity-100"
           x-transition:leave-end="opacity-0"/>
-        <div class="bg-white px-8 py-6 max-w-4xl rounded-2xl shadow-lg z-50"
+        <div class="bg-white px-8 py-6 max-w-4xl md:min-w-1/2 rounded-2xl shadow-lg z-50"
              x-show="showModal"
              x-transition:enter="transition ease-out duration-300 delay-100"
              x-transition:enter-start="opacity-0 transform scale-90"
