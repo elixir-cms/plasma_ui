@@ -11,7 +11,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
   def render(assigns) do
     ~H"""
     <fieldset class="border" form="entity" name="entity_details">
-      <legend>Entity Details</legend>
+      <legend>Entity details</legend>
       <Label field="label" />
       <TextInput id="entity_label" name="entity[label]" value={{ @entity.label }} />
       <Label field="source" />
