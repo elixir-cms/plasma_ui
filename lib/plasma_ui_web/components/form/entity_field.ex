@@ -27,7 +27,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <Select
         id={{ "entity_fields_#{@name}_storage_type" }}
         name={{ "entity[fields][#{@name}][storage_type]" }}
-        options={{ Binary: "binary", Boolean: "boolean" }}
+        options={{ Boolean: "boolean", "Naive Datetime": "naive_datetime", String: "string"}}
         prompt="Storage type"
         selected={{ @field.storage_type }}
       />
