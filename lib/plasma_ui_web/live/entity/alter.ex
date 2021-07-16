@@ -35,20 +35,20 @@ defmodule PlasmaUiWeb.Entity.Alter do
               title={{ Phoenix.HTML.Form.humanize(field_name) }}>
               <EntityField field={{ field }} name={{ field_name }} />
             </Accordion>
+            <Modal>
+              <template slot="trigger">
+                <div class="button mt-4">Add field</div>
+              </template>
+              <template slot="content">
+                <Form for={{ :new_field }} submit="add_field" opts={{ id: "new_field" }}>
+                  <NewField  field={{ @new_field }} />
+                  <button @click="showModal = false" type="submit">Add field</button>
+                  <div class="button gray" @click="showModal = false">Cancel</div>
+                </Form>
+              </template>
+            </Modal>
           </fieldset>
         </Form>
-        <Modal>
-          <template slot="trigger">
-            <div class="button">Add field</div>
-          </template>
-          <template slot="content">
-            <Form for={{ :new_field }} submit="add_field" opts={{ id: "new_field" }}>
-              <NewField  field={{ @new_field }} />
-              <button @click="showModal = false" type="submit">Add field</button>
-              <div class="button gray" @click="showModal = false">Cancel</div>
-            </Form>
-          </template>
-        </Modal>
       </article>
     </section>
     """
