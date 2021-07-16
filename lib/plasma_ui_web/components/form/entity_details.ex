@@ -6,7 +6,8 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
   use Surface.Component
   alias Surface.Components.Form.{Label, TextInput}
 
-  prop entity, :map, required: true
+  prop(editing, :boolean, required: true)
+  prop(entity, :map, required: true)
 
   def render(assigns) do
     ~H"""
@@ -18,7 +19,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
       <TextInput
         id="entity_source"
         name="entity[source]"
-        opts={{ [disabled: true] }}
+        opts={{ [disabled: @editing] }}
         value={{ @entity.source }}
       />
       <Label field="singular" />

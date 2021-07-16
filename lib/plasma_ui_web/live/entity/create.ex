@@ -1,6 +1,6 @@
-defmodule PlasmaUiWeb.Entity.Alter do
+defmodule PlasmaUiWeb.Entity.Create do
   @moduledoc """
-  A liveview page that shows the alter entity form.
+  A liveview page that allows users to create a new entity.
   """
 
   use Surface.LiveView
@@ -10,7 +10,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
   alias PlasmaUiWeb.Helpers.Entity
 
   def mount(_params, _session, socket) do
-    entity = Map.merge(Entity.get_details(), %{fields: Entity.get_fields()})
+    entity = Map.merge(Entity.get_empty_details(), %{fields: %{}})
 
     initial_socket =
       socket
@@ -23,11 +23,11 @@ defmodule PlasmaUiWeb.Entity.Alter do
   def render(assigns) do
     ~H"""
     <section>
-      <h2>Alter Entity - {{ @entity.label }}</h2>
+      <h2>Create Entity</h2>
       <article>
-        <p>Use this form to alter entity details and fields associated with the entity.</p>
+        <p>Use this form to create a new entity.</p>
         <Form for={{ :entity }} change="change" opts={{ id: "entity" }}>
-          <EntityDetails entity={{ @entity }} editing={{ true }} />
+          <EntityDetails entity={{ @entity }} />
           <fieldset class="border" form="entity" name="entity[fields]">
             <legend>Fields</legend>
             <Accordion

@@ -12,6 +12,15 @@ defmodule PlasmaUiWeb.Helpers.Entity do
     }
   end
 
+  def get_empty_details() do
+    %{
+      source: "",
+      label: "",
+      singular: "",
+      plural: ""
+    }
+  end
+
   def get_new_field() do
     %{
       field_name: "",

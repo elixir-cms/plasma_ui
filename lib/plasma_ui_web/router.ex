@@ -18,9 +18,10 @@ defmodule PlasmaUiWeb.Router do
   scope "/", PlasmaUiWeb do
     pipe_through(:browser)
 
-    live "/", PageLive, :index
-    live "/alter-entity", Entity.Alter
-    live "/entities", Entity.List
+    live("/", PageLive, :index)
+    live("/entity/alter", Entity.Alter)
+    live("/entity/create", Entity.Create)
+    live("/entity/list", Entity.List)
   end
 
   # Other scopes may use custom stacks.
