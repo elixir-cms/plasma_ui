@@ -17,7 +17,7 @@ defmodule PlasmaUiWeb.Components.Form.NewField do
         id={{ "new_field_field_name" }}
         name={{ "new_field[field_name]" }}
         value={{ @field.field_name }}
-        opts={{ placeholder: "Field name" }}
+        opts={{ [placeholder: "Field name", required: true] }}
       />
       <Label text="Field type" />
       <Select
