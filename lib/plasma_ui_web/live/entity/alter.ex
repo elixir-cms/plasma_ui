@@ -48,6 +48,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
               </template>
             </Modal>
           </fieldset>
+          <button type="submit">Update Entity</button>
         </Form>
       </article>
     </section>

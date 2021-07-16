@@ -28,6 +28,7 @@ defmodule PlasmaUiWeb.Entity.Create do
         <p>Use this form to create a new entity.</p>
         <Form for={{ :entity }} change="change" opts={{ id: "entity" }}>
           <EntityDetails entity={{ @entity }} />
+          <button type="submit">Create Entity</button>
         </Form>
       </article>
     </section>
