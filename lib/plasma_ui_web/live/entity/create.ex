@@ -28,27 +28,7 @@ defmodule PlasmaUiWeb.Entity.Create do
         <p>Use this form to create a new entity.</p>
         <Form for={{ :entity }} change="change" opts={{ id: "entity" }}>
           <EntityDetails entity={{ @entity }} />
-          <fieldset class="border" form="entity" name="entity[fields]">
-            <legend>Fields</legend>
-            <Accordion
-              :for={{ {field_name, field} <- Map.to_list(@entity.fields) }}
-              title={{ Phoenix.HTML.Form.humanize(field_name) }}>
-              <EntityField field={{ field }} name={{ field_name }} />
-            </Accordion>
-          </fieldset>
         </Form>
-        <Modal>
-          <template slot="trigger">
-            <div class="button">Add field</div>
-          </template>
-          <template slot="content">
-            <Form for={{ :new_field }} submit="add_field" opts={{ id: "new_field" }}>
-              <NewField  field={{ @new_field }} />
-              <button @click="showModal = false" type="submit">Add field</button>
-              <div class="button gray" @click="showModal = false">Cancel</div>
-            </Form>
-          </template>
-        </Modal>
       </article>
     </section>
     """
