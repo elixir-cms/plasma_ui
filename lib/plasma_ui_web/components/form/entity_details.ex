@@ -15,7 +15,12 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
       <Label field="label" />
       <TextInput id="entity_label" name="entity[label]" value={{ @entity.label }} />
       <Label field="source" />
-      <TextInput id="entity_source" name="entity[source]" value={{ @entity.source }} />
+      <TextInput
+        id="entity_source"
+        name="entity[source]"
+        opts={{ [disabled: true] }}
+        value={{ @entity.source }}
+      />
       <Label field="singular" />
       <TextInput id="entity_singular" name="entity[singular]" value={{ @entity.singular }} />
       <Label field="plural" />

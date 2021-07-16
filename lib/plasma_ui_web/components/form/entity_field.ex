@@ -20,14 +20,15 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <TextInput
         id={{ "entity_fields_#{@name}_field_type" }}
         name={{ "entity[fields][#{@name}][field_type]" }}
+        opts={{ [disabled: true, placeholder: "Field type"] }}
         value={{ @field.field_type }}
-        opts={{ placeholder: "Field type" }}
       />
       <Label text="Storage type" />
       <Select
         id={{ "entity_fields_#{@name}_storage_type" }}
         name={{ "entity[fields][#{@name}][storage_type]" }}
         options={{ Boolean: "boolean", "Naive Datetime": "naive_datetime", String: "string"}}
+        opts={{ [disabled: true] }}
         prompt="Storage type"
         selected={{ @field.storage_type }}
       />
