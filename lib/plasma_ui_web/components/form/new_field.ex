@@ -10,7 +10,7 @@ defmodule PlasmaUiWeb.Components.Form.NewField do
 
   def render(assigns) do
     ~H"""
-    <fieldset class="border" form="new_field" name="new_field">
+    <fieldset class="border p-8" form="new_field" name="new_field">
       <legend>New Field</legend>
       <Label text="Field Name" />
       <TextInput
