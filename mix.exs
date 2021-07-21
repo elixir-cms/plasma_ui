@@ -60,9 +60,9 @@ defmodule PlasmaUi.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:surface, "~> 0.4.0"},
-      {:surface_catalogue, "~> 0.0.8", only: [:dev, :test]},
-      {:surface_formatter, "~> 0.4.0"}
+      {:surface, "~> 0.5.1"},
+      {:surface_catalogue, "~> 0.1.0", only: [:dev, :test]},
+      {:surface_formatter, "~> 0.5.1"}
     ]
   end
 

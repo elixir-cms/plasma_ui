@@ -13,18 +13,18 @@ defmodule PlasmaUiWeb.PageLive do
 
   @impl true
   def render(assigns) do
-    ~H"""
+    ~F"""
     <section>
       <Modal>
-        <template slot="trigger">
+        <#template slot="trigger">
           <div class="button">Add Field</div>
-        </template>
-        <template slot="content">
+        </#template>
+        <#template slot="content">
           <h3>Modals Are Easy!</h3>
           <p>Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros.</p>
           <br>
           <button onclick="alert('Hello World')">Greet Me</button>
-        </template>
+        </#template>
       </Modal>
     </section>
     """

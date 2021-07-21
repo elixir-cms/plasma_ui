@@ -12,19 +12,19 @@ defmodule PlasmaUiWeb.Components.DataTable do
   slot cols
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <table class="table is-bordered is-striped is-hoverable is-fullwidth">
       <thead>
         <tr>
-          <th :for={{ col <- @cols }}>
-            {{ Phoenix.Naming.humanize(col.field) }}
+          <th :for={col <- @cols}>
+            {Phoenix.Naming.humanize(col.field)}
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr :for={{ item <- @items }} class={{ "is-selected": item[:selected] }}>
-          <td :for={{ col <- @cols, field = String.to_atom(col.field) }}>
-            {{ col.filter.(item[field]) }}
+        <tr :for={item <- @items} class={"is-selected": item[:selected]}>
+          <td :for={col <- @cols, field = String.to_atom(col.field)}>
+            {col.filter.(item[field])}
           </td>
         </tr>
       </tbody>

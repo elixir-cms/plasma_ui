@@ -21,31 +21,31 @@ defmodule PlasmaUiWeb.Entity.Alter do
   end
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <section>
-      <h2>Alter Entity - {{ @entity.label }}</h2>
+      <h2>Alter Entity - {@entity.label}</h2>
       <article>
         <p>Use this form to alter entity details and fields associated with the entity.</p>
-        <Form for={{ :entity }} change="change" opts={{ id: "entity" }}>
-          <EntityDetails entity={{ @entity }} editing={{ true }} />
+        <Form for={:entity} change="change" opts={id: "entity"}>
+          <EntityDetails entity={@entity} editing={true} />
           <fieldset class="border pb-2" form="entity" name="entity[fields]">
             <legend>Fields</legend>
             <Accordion
-              :for={{ {field_name, field} <- Map.to_list(@entity.fields) }}
-              title={{ Phoenix.HTML.Form.humanize(field_name) }}>
-              <EntityField field={{ field }} name={{ field_name }} />
+              :for={{field_name, field} <- Map.to_list(@entity.fields)}
+              title={Phoenix.HTML.Form.humanize(field_name)}>
+              <EntityField field={field} name={field_name} />
             </Accordion>
             <Modal>
-              <template slot="trigger">
+              <#template slot="trigger">
                 <div class="button mt-4">Add field</div>
-              </template>
-              <template slot="content">
-                <Form for={{ :new_field }} submit="add_field" opts={{ id: "new_field" }}>
-                  <NewField  field={{ @new_field }} />
+              </#template>
+              <#template slot="content">
+                <Form for={:new_field} submit="add_field" opts={id: "new_field"}>
+                  <NewField  field={@new_field} />
                   <button @click="showModal = false" type="submit">Add field</button>
                   <div class="button gray" @click="showModal = false">Cancel</div>
                 </Form>
-              </template>
+              </#template>
             </Modal>
           </fieldset>
           <button type="submit">Update Entity</button>
@@ -70,7 +70,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
     {:noreply, new_socket}
   end
 
-  def handle_event("change", %{"entity" => params}, socket) do
+  def handle_event("change", %{"entity" => _params}, socket) do
     {:noreply, socket}
   end
 end

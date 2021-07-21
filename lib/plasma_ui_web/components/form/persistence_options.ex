@@ -11,35 +11,35 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
   prop options, :map, required: true
 
   def render(assigns) do
-    ~H"""
-    <fieldset form="entity" name={{ "entity[fields][#{@parent_name}][persistence_options]" }}>
+    ~F"""
+    <fieldset form="entity" name={"entity[fields][#{@parent_name}][persistence_options]"}>
       <legend>Persistence options</legend>
       <Checkbox
-        id={{ "entity_fields_#{@parent_name}_persistence_options_primary_key" }}
-        name={{ "entity[fields][#{@parent_name}][persistence_options][primary_key]" }}
-        value={{ @options.primary_key }}
+        id={"entity_fields_#{@parent_name}_persistence_options_primary_key"}
+        name={"entity[fields][#{@parent_name}][persistence_options][primary_key]"}
+        value={@options.primary_key}
       />
-      <Label field={{ "fields_#{@parent_name}_persistence_options_primary_key" }} text="Primary key" />
+      <Label field={"fields_#{@parent_name}_persistence_options_primary_key"} text="Primary key" />
       <br>
       <Checkbox
-        id={{ "entity_fields_#{@parent_name}_persistence_options_nullable" }}
-        name={{ "entity[fields][#{@parent_name}][persistence_options][nullable]" }}
-        value={{ @options.nullable }}
+        id={"entity_fields_#{@parent_name}_persistence_options_nullable"}
+        name={"entity[fields][#{@parent_name}][persistence_options][nullable]"}
+        value={@options.nullable}
       />
-      <Label field={{ "fields_#{@parent_name}_persistence_options_nullable" }} text="Nullable" />
+      <Label field={"fields_#{@parent_name}_persistence_options_nullable"} text="Nullable" />
       <br>
       <Checkbox
-        id={{ "entity_fields_#{@parent_name}_persistence_options_unique" }}
-        name={{ "entity[fields][#{@parent_name}][persistence_options][unique]" }}
-        value={{ @options.unique }}
+        id={"entity_fields_#{@parent_name}_persistence_options_unique"}
+        name={"entity[fields][#{@parent_name}][persistence_options][unique]"}
+        value={@options.unique}
       />
-      <Label field={{ "fields_#{@parent_name}_persistence_options_unique" }} text="Unique" />
+      <Label field={"fields_#{@parent_name}_persistence_options_unique"} text="Unique" />
       <br>
       <Label text="Default" />
       <TextInput
-        id={{ "entity_fields_#{@parent_name}_persistence_options_default" }}
-        name={{ "entity[fields][#{@parent_name}][persistence_options][default]" }}
-        value={{ @options.default }}
+        id={"entity_fields_#{@parent_name}_persistence_options_default"}
+        name={"entity[fields][#{@parent_name}][persistence_options][default]"}
+        value={@options.default}
       />
     </fieldset>
     """

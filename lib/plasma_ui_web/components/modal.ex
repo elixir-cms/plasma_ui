@@ -9,12 +9,12 @@ defmodule PlasmaUiWeb.Components.Modal do
   slot(content, required: true)
 
   def(render(assigns)) do
-    ~H"""
+    ~F"""
     <div
       @keydown.escape.window="showModal = false"
       x-data="{ 'showModal': false }">
       <div @click="showModal = true">
-        <slot name="trigger" />
+        <#slot name="trigger" />
       </div>
       <div
         class="fixed flex inset-0 items-center justify-center min-h-screen"
@@ -37,7 +37,7 @@ defmodule PlasmaUiWeb.Components.Modal do
              x-transition:leave="transition ease-in duration-300 delay-100"
              x-transition:leave-start="opacity-100 transform scale-100"
              x-transition:leave-end="opacity-0 transform scale-90">
-          <slot name="content" />
+          <#slot name="content" />
         </div>
       </div>
     </div>

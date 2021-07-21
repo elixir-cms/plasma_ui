@@ -5,8 +5,7 @@ defmodule PlasmaUiWeb.Entity.Create do
 
   use Surface.LiveView
   alias Surface.Components.Form
-  alias PlasmaUiWeb.Components.{Accordion, Modal}
-  alias PlasmaUiWeb.Components.Form.{EntityDetails, EntityField, NewField}
+  alias PlasmaUiWeb.Components.Form.{EntityDetails}
   alias PlasmaUiWeb.Helpers.Entity
 
   def mount(_params, _session, socket) do
@@ -21,13 +20,13 @@ defmodule PlasmaUiWeb.Entity.Create do
   end
 
   def render(assigns) do
-    ~H"""
+    ~F"""
     <section>
       <h2>Create Entity</h2>
       <article>
         <p>Use this form to create a new entity.</p>
-        <Form for={{ :entity }} change="change" opts={{ id: "entity" }}>
-          <EntityDetails entity={{ @entity }} />
+        <Form for={:entity} change="change" opts={id: "entity"}>
+          <EntityDetails entity={@entity} editing={false} />
           <button type="submit">Create Entity</button>
         </Form>
       </article>
@@ -50,7 +49,7 @@ defmodule PlasmaUiWeb.Entity.Create do
     {:noreply, new_socket}
   end
 
-  def handle_event("change", %{"entity" => params}, socket) do
+  def handle_event("change", %{"entity" => _params}, socket) do
     {:noreply, socket}
   end
 end
