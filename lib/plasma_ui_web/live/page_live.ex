@@ -5,6 +5,7 @@ defmodule PlasmaUiWeb.PageLive do
 
   use Surface.LiveView
   alias PlasmaUiWeb.Components.Modal
+  alias Surface.Components.LivePatch
 
   @impl true
   def mount(_params, _session, socket) do
@@ -15,17 +16,15 @@ defmodule PlasmaUiWeb.PageLive do
   def render(assigns) do
     ~F"""
     <section>
-      <Modal>
-        <#template slot="trigger">
-          <div class="button">Add Field</div>
-        </#template>
-        <#template slot="content">
-          <h3>Modals Are Easy!</h3>
-          <p>Fusce sagittis, libero non molestie mollis, magna orci ultrices dolor, at vulputate neque nulla lacinia eros.</p>
-          <br>
-          <button onclick="alert('Hello World')">Greet Me</button>
-        </#template>
-      </Modal>
+      <LivePatch to="/entity/list">
+        <div class="button">List Entities</div>
+      </LivePatch>
+      <LivePatch to="/entity/create">
+        <div class="button">Create Entity</div>
+      </LivePatch>
+      <LivePatch to="/entity/alter">
+        <div class="button">Alter Entity</div>
+      </LivePatch>
     </section>
     """
   end
