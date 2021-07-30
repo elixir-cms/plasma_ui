@@ -25,7 +25,7 @@ defmodule PlasmaUiWeb.Entity.Create do
       <h2>Create Entity</h2>
       <article>
         <p>Use this form to create a new entity.</p>
-        <Form for={:entity} change="change" opts={id: "entity"}>
+        <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing={false} />
           <button type="submit">Create Entity</button>
         </Form>
@@ -49,7 +49,8 @@ defmodule PlasmaUiWeb.Entity.Create do
     {:noreply, new_socket}
   end
 
-  def handle_event("change", %{"entity" => _params}, socket) do
-    {:noreply, socket}
+  def handle_event("submit", %{"entity" => params}, socket) do
+    IO.inspect(params)
+    {:noreply, push_redirect(socket, to: "/")}
   end
 end

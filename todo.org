@@ -17,8 +17,6 @@
 ** Have an expandable section for constraints (gray out and explain if N/A because not first migration set) and one for Validation.
 ** Under Validation you can dig into adding a list of validations of different types.
 *** Only show ones that apply for the field type too.
-* Create Entity
-** Almost identical to Alter Entity, but allows user to set slug and field/storage types
 * Settings
 ** I'm guessing storage/failover storage are mostly thoughts about what kind of stuff could be in here which is fine.
 ** Defaults is interesting, I don't think we should provide those right away.
