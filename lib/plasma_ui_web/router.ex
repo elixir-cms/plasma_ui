@@ -1,6 +1,7 @@
 defmodule PlasmaUiWeb.Router do
   use PlasmaUiWeb, :router
   import Surface.Catalogue.Router
+  alias PlasmaUiWeb.Routes
 
   pipeline :browser do
     plug(:accepts, ["html"])
@@ -18,10 +19,8 @@ defmodule PlasmaUiWeb.Router do
   scope "/", PlasmaUiWeb do
     pipe_through(:browser)
 
-    live("/", PageLive, :index)
-    live("/entity/alter", Entity.Alter)
-    live("/entity/create", Entity.Create)
-    live("/entity/list", Entity.List)
+    live("/", Entity.List, :index, as: :live)
+    for route <- Routes.list(), do: live(route.path, route.module, as: :live)
   end
 
   # Other scopes may use custom stacks.

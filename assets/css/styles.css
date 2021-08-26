@@ -18,3 +18,8 @@ p { @apply mb-2 }
 
 /* Components */
 .accordion { @apply flex items-center justify-between bg-gray-200 border p-4 cursor-pointer }
+
+/* Navigation */
+.container nav { width: 100%; }
+.container nav ul { text-align: center; }
+.container nav ul li { @apply inline-block mx-4 }
