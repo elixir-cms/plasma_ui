@@ -4,11 +4,11 @@ defmodule PlasmaUiWeb.Components.Form.ValidationOptions do
   """
 
   use Surface.Component
-  alias Surface.Components.Form.{Label, NumberInput, TextInput, Checkbox}
+  alias Surface.Components.Form.{Label, NumberInput, TextInput}
 
-  prop parent_name, :string, required: true
+  prop(parent_name, :string, required: true)
 
-  prop options, :map, required: true
+  prop(options, :map, required: true)
 
   def render(assigns) do
     ~F"""

@@ -14,12 +14,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
     <fieldset class="border" form="entity" name="entity_details">
       <legend>Entity details</legend>
       <Label field="label" />
-      <TextInput
-        id="entity_label"
-        name="entity[label]"
-        opts={required: true}
-        value={@entity.label}
-      />
+      <TextInput id="entity_label" name="entity[label]" opts={required: true} value={@entity.label} />
       <Label field="source" />
       <TextInput
         id="entity_source"

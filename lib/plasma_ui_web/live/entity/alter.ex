@@ -27,25 +27,26 @@ defmodule PlasmaUiWeb.Entity.Alter do
       <article>
         <p>Use this form to alter entity details and fields associated with the entity.</p>
         <Form for={:entity} change="change" opts={id: "entity"}>
-          <EntityDetails entity={@entity} editing={true} />
+          <EntityDetails entity={@entity} editing />
           <fieldset class="border pb-2" form="entity" name="entity[fields]">
             <legend>Fields</legend>
             <Accordion
               :for={{field_name, field} <- Map.to_list(@entity.fields)}
-              title={Phoenix.HTML.Form.humanize(field_name)}>
+              title={Phoenix.HTML.Form.humanize(field_name)}
+            >
               <EntityField field={field} name={field_name} />
             </Accordion>
             <Modal>
-              <#template slot="trigger">
+              <:trigger>
                 <div class="button mt-4">Add field</div>
-              </#template>
-              <#template slot="content">
+              </:trigger>
+              <:content>
                 <Form for={:new_field} submit="add_field" opts={id: "new_field"}>
-                  <NewField  field={@new_field} />
+                  <NewField field={@new_field} />
                   <button @click="showModal = false" type="submit">Add field</button>
                   <div class="button gray" @click="showModal = false">Cancel</div>
                 </Form>
-              </#template>
+              </:content>
             </Modal>
           </fieldset>
           <button type="submit">Update Entity</button>
