@@ -5,10 +5,15 @@ defmodule PlasmaUiWeb.Entity.List do
 
   use Surface.LiveView
   alias PlasmaUiWeb.Components.{Column, DataTable}
-  alias PlasmaUiWeb.Helpers.Entity
+  alias PlasmaUiWeb.Helpers.Store
 
   def mount(_params, _session, socket) do
-    entities = Entity.get_entities()
+    entities =
+      Enum.map(Store.list_types(), fn x ->
+        {:ok, type} = Store.get_type(x)
+        type
+      end)
+
     {:ok, assign(socket, :entities, entities)}
   end
 
@@ -19,9 +24,10 @@ defmodule PlasmaUiWeb.Entity.List do
       <article>
         <p>The table below shows a list of all available entities. Click on an entity title to alter it.</p>
         <DataTable items={@entities}>
-          <Column field="label" />
-          <Column field="archived" />
-          <Column field="last_updated" filter={&PlasmaUiWeb.Helpers.DateTime.humanize_iso8601/1} />
+          <Column field="label"><a href="/edit">Edit</a></Column>
+          <Column field="source" />
+          <Column field="singular" />
+          <Column field="plural" />
         </DataTable>
       </article>
     </section>

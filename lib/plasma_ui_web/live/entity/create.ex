@@ -7,6 +7,8 @@ defmodule PlasmaUiWeb.Entity.Create do
   alias Surface.Components.Form
   alias PlasmaUiWeb.Components.Form.{EntityDetails}
   alias PlasmaUiWeb.Helpers.Entity
+  alias EctoEntity.Store
+  alias EctoEntity.Type
 
   def mount(_params, _session, socket) do
     entity = Map.merge(Entity.get_empty_details(), %{fields: %{}})
@@ -49,8 +51,35 @@ defmodule PlasmaUiWeb.Entity.Create do
     {:noreply, new_socket}
   end
 
-  def handle_event("submit", %{"entity" => params}, socket) do
-    IO.inspect(params)
-    {:noreply, push_redirect(socket, to: "/")}
+  def handle_event(
+        "submit",
+        %{
+          "entity" => %{
+            "source" => source,
+            "label" => label,
+            "singular" => singular,
+            "plural" => plural
+          }
+        },
+        socket
+      ) do
+    type =
+      Type.new(source, label, singular, plural)
+      |> Type.migration_defaults!(fn set -> set end)
+
+    store =
+      Store.init(%{
+        type_storage: %{
+          module: EctoEntity.Store.SimpleJson,
+          settings: %{directory_path: Path.join(System.tmp_dir(), "store")}
+        },
+        repo: %{module: Repo, dynamic: false}
+      })
+
+    Store.put_type(store, type)
+    IO.inspect(Store.get_type(store, source))
+
+    # {:noreply, push_redirect(socket, to: "/")}
+    {:noreply, socket}
   end
 end

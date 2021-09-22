@@ -8,8 +8,10 @@ defmodule PlasmaUiWeb.Entity.Alter do
   alias PlasmaUiWeb.Components.{Accordion, Modal}
   alias PlasmaUiWeb.Components.Form.{EntityDetails, EntityField, NewField}
   alias PlasmaUiWeb.Helpers.Entity
+  alias PlasmaUiWeb.Helpers.Store
 
-  def mount(_params, _session, socket) do
+  def mount(params, _session, socket) do
+    IO.inspect(Store.get_type(params["source"]))
     entity = Map.merge(Entity.get_details(), %{fields: Entity.get_fields()})
 
     initial_socket =

@@ -11,7 +11,7 @@ defmodule PlasmaUiWeb.Routes do
       },
       %{
         name: "Alter Entity",
-        path: "/entity/alter",
+        path: "/entity/:source/alter",
         module: Entity.Alter
       }
     ]

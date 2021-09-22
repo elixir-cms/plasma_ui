@@ -17,12 +17,9 @@
             <li>
               <%= link "Home", to: Routes.live_path(@conn, :index) %>
             </li>
-            <%= for route <- PlasmaUiWeb.Routes.list do %>
-              <li>
-                <%= link route.name, to: Routes.live_path(@conn, Module.concat(["PlasmaUiWeb", route.module])) %>
-              </li>
-            <% end %>
             <li>
+              <%= link "Create Entity", to: Routes.live_path(@conn, PlasmaUiWeb.Entity.Create) %>
+            </li>
           </ul>
         </nav>
       </section>

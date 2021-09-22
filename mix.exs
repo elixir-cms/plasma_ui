@@ -21,7 +21,7 @@ defmodule PlasmaUi.MixProject do
   def application do
     [
       mod: {PlasmaUi.Application, []},
-      extra_applications: [:logger, :runtime_tools, :telemetry]
+      extra_applications: [:crypto, :logger, :runtime_tools, :telemetry]
     ]
   end
 
@@ -62,7 +62,8 @@ defmodule PlasmaUi.MixProject do
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:surface, "~> 0.5.1"},
       {:surface_catalogue, "~> 0.1.0", only: [:dev, :test]},
-      {:surface_formatter, "~> 0.5.1"}
+      {:surface_formatter, "~> 0.5.1"},
+      {:ecto_entity, path: "../ecto_entity"}
     ]
   end
 
