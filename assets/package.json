@@ -30,7 +30,7 @@
     "postcss-loader": "^4.2",
     "sass": "^1.32.11",
     "sass-loader": "^10.1.1",
-    "tailwindcss": "^2.1.1",
+    "tailwindcss": "^2.2.15",
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.2"

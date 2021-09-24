@@ -1,15 +1,13 @@
 module.exports = {
-  purge: {
-    mode: 'all',
-    preserveHtmlElements: false,
-    content: [
-      '../lib/**/*.ex',
-      '../lib/**/*.leex',
-      '../lib/**/*.eex',
-      './js/**/*.js'
-    ]
-  },
+  mode: 'jit',
+  purge: [
+    '../lib/**/*.ex',
+    '../lib/**/*.leex',
+    '../lib/**/*.eex',
+    './js/**/*.js'
+  ],
   theme: {
+    extend: {},
     minWidth: {
       0: '0',
       '1/4': '25%',
