@@ -9,7 +9,7 @@ defmodule PlasmaUiWeb.Helpers.Store do
     Store.init(%{
       type_storage: %{
         module: EctoEntity.Store.SimpleJson,
-        settings: %{directory_path: Path.join(System.tmp_dir(), "store")}
+        settings: %{directory_path: Path.join(File.cwd!(), "store")}
       },
       repo: %{module: Repo, dynamic: false}
     })
@@ -21,5 +21,9 @@ defmodule PlasmaUiWeb.Helpers.Store do
 
   def list_types do
     get_settings() |> Store.list_types()
+  end
+
+  def put_type(type) do
+    get_settings() |> Store.put_type(type)
   end
 end
