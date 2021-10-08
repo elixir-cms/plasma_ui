@@ -10,16 +10,18 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
   prop(entity, :map, required: true)
 
   def render(assigns) do
+    source_style = if assigns.editing, do: "display:none", else: ""
+
     ~F"""
     <fieldset class="border" form="entity" name="entity_details">
       <legend>Entity details</legend>
       <Label field="label" />
       <TextInput id="entity_label" name="entity[label]" opts={required: true} value={@entity.label} />
-      <Label field="source" />
+      <Label field="source" opts={[style: source_style]}/>
       <TextInput
         id="entity_source"
         name="entity[source]"
-        opts={[disabled: @editing, required: true]}
+        opts={[style: source_style, required: true]}
         value={@entity.source}
       />
       <Label field="singular" />

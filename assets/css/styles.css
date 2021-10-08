@@ -14,6 +14,10 @@ form > fieldset > input {
   border-radius: 3px;
   width: 100%;
 }
+form > fieldset > input[style*="background-image: url"] {
+  filter: none !important;
+  -webkit-filter: none !important;
+}
 fieldset legend { @apply text-3xl }
 fieldset.border > legend { @apply border-8 border-white -mb-3.5 -ml-3.5 }
 input[type="checkbox"] + label { @apply font-normal inline }
