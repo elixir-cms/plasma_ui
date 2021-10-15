@@ -7,6 +7,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
   alias PlasmaUiWeb.Components.Accordion
   alias Surface.Components.Form.{Checkbox, Label, TextInput, Select}
   alias PlasmaUiWeb.Components.Form.{PersistenceOptions, ValidationOptions}
+  alias PlasmaUiWeb.Helpers.Entity, as: EntityHelper
 
   prop(name, :string, required: true)
 
@@ -20,7 +21,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <TextInput
         id={"entity_fields_#{@name}_field_type"}
         name={"entity[fields][#{@name}][field_type]"}
-        opts={[disabled: true, placeholder: "Field type"]}
+        opts={[readonly: true, placeholder: "Field type"]}
         value={@field.field_type}
       />
       <Label text="Storage type" />
@@ -28,7 +29,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
         id={"entity_fields_#{@name}_storage_type"}
         name={"entity[fields][#{@name}][storage_type]"}
         options={Boolean: "boolean", "Naive Datetime": "naive_datetime", String: "string"}
-        opts={[disabled: true]}
+        opts={[readonly: true, tabindex: -1]}
         prompt="Storage type"
         selected={@field.storage_type}
       />
@@ -36,14 +37,14 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <Checkbox
         id={"entity_fields_#{@name}_validation_options_required"}
         name={"entity[fields][#{@name}][validation_options][required]"}
-        value={@field.validation_options.required}
+        value={if @field.validation_options == %{}, do: false, else: @field.validation_options.required}
       />
       <Label field={"fields_#{@name}_validation_options_required"} text="Required Field" />
       <br>
       <Checkbox
         id={"entity_fields_#{@name}_persistence_options_indexed"}
         name={"entity[fields][#{@name}][persistence_options][indexed]"}
-        value={@field.persistence_options.indexed}
+        value={EntityHelper.map_value?(@field.persistence_options, :indexed)}
       />
       <Label field={"fields_#{@name}_persistence_options_indexed"} text="Enable Sorting & Filtering" />
       <Label text="Advanced Options" />
