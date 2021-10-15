@@ -54,6 +54,34 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <Accordion title="Validation options">
         <ValidationOptions parent_name={@name} options={@field.validation_options} />
       </Accordion>
+      <Accordion title="More" style="display: none;">
+        <Label text="Filters" />
+        <fieldset form="entity" name={"entity[fields][#{@name}][filters]"}>
+          <TextInput
+            id={"entity_fields_#{@name}_filters"}
+            name={"entity[fields][#{@name}][filters]"}
+            opts={[placeholder: "Filters"]}
+            value={@field.filters}
+          />
+        </fieldset>
+        <Label text="Meta" />
+        <fieldset form="entity" name={"entity[fields][#{@name}][meta]"}>
+          {#for key <- Map.keys(@field.meta)}
+            <fieldset form="entity" name={"entity[fields][#{@name}][meta][#{key}]"}>
+              <legend>{Phoenix.HTML.Form.humanize(key)}</legend>
+              {#for key2 <- Map.keys(@field.meta[key])}
+                <Label text={Phoenix.HTML.Form.humanize(key2)} />
+                <TextInput
+                  id={"entity_fields_#{@name}_meta_#{key}_#{key2}"}
+                  name={"entity[fields][#{@name}][meta][#{key}][#{key2}]"}
+                  opts={[placeholder: key2]}
+                  value={@field.meta[key][key2]}
+                />
+              {/for}
+            </fieldset>
+          {/for}
+        </fieldset>
+      </Accordion>
     </fieldset>
     """
   end
