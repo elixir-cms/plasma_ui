@@ -10,18 +10,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
   alias PlasmaUiWeb.Helpers.Entity
   alias PlasmaUiWeb.Helpers.Store
 
-  def mount(params, _session, socket) do
-    IO.inspect(Store.get_type(params["source"]))
-    entity = Map.merge(Entity.get_details(), %{fields: Entity.get_fields()})
-
-    initial_socket =
-      socket
-      |> assign(:entity, entity)
-      |> assign(:new_field, Entity.get_new_field())
-
-    {:ok, initial_socket}
-  end
-
   def render(assigns) do
     ~F"""
     <section>
@@ -56,6 +44,18 @@ defmodule PlasmaUiWeb.Entity.Alter do
       </article>
     </section>
     """
+  end
+
+  def mount(params, _session, socket) do
+    {:ok, entity} = Store.get_type(params["source"])
+
+    initial_socket =
+      socket
+      |> assign(:original_entity, entity)
+      |> assign(:entity, entity)
+      |> assign(:new_field, EntityHelper.get_new_field())
+
+    {:ok, initial_socket}
   end
 
   def handle_event("add_field", %{"new_field" => field}, socket) do

@@ -10,17 +10,6 @@ defmodule PlasmaUiWeb.Entity.Create do
   alias PlasmaUiWeb.Helpers.Store
   alias EctoEntity.Type
 
-  def mount(_params, _session, socket) do
-    entity = Map.merge(Entity.get_empty_details(), %{fields: %{}})
-
-    initial_socket =
-      socket
-      |> assign(:entity, entity)
-      |> assign(:new_field, Entity.get_new_field())
-
-    {:ok, initial_socket}
-  end
-
   def render(assigns) do
     ~F"""
     <section>
@@ -34,6 +23,17 @@ defmodule PlasmaUiWeb.Entity.Create do
       </article>
     </section>
     """
+  end
+
+  def mount(_params, _session, socket) do
+    entity = Map.merge(Entity.get_empty_details(), %{fields: %{}})
+
+    initial_socket =
+      socket
+      |> assign(:entity, entity)
+      |> assign(:new_field, Entity.get_new_field())
+
+    {:ok, initial_socket}
   end
 
   def handle_event(

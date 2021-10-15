@@ -7,16 +7,6 @@ defmodule PlasmaUiWeb.Entity.List do
   alias PlasmaUiWeb.Components.{Column, DataTable}
   alias PlasmaUiWeb.Helpers.Store
 
-  def mount(_params, _session, socket) do
-    entities =
-      Enum.map(Store.list_types(), fn x ->
-        {:ok, type} = Store.get_type(x)
-        type
-      end)
-
-    {:ok, assign(socket, :entities, entities)}
-  end
-
   def render(assigns) do
     ~F"""
     <section>
@@ -32,5 +22,15 @@ defmodule PlasmaUiWeb.Entity.List do
       </article>
     </section>
     """
+  end
+
+  def mount(_params, _session, socket) do
+    entities =
+      Enum.map(Store.list_types(), fn x ->
+        {:ok, type} = Store.get_type(x)
+        type
+      end)
+
+    {:ok, assign(socket, :entities, entities)}
   end
 end
