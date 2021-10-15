@@ -7,9 +7,9 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
   alias Surface.Components.Form.{Label, TextInput, Checkbox}
   alias PlasmaUiWeb.Helpers.Entity, as: EntityHelper
 
-  prop parent_name, :string, required: true
+  prop(parent_name, :string, required: true)
 
-  prop options, :map, required: true
+  prop(options, :map, required: true)
 
   def render(assigns) do
     ~F"""
