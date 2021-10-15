@@ -36,8 +36,8 @@ npm-debug.log
 # Development environment
 .envrc
 .log/
-postgres/
-postgres_data/
+pg-localhost/
+pg-data/
 /priv/plts/*.plt
 /priv/plts/*.plt.hash
 /store/
