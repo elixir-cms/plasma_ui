@@ -26,21 +26,23 @@ defmodule PlasmaUiWeb.Entity.Alter do
             >
               <EntityField field={field} name={field_name} />
             </Accordion>
-            <Modal>
-              <:trigger>
-                <div class="button mt-4">Add field</div>
-              </:trigger>
-              <:content>
-                <Form for={:new_field} submit="add_field" opts={id: "new_field"}>
-                  <NewField field={@new_field} />
-                  <button @click="showModal = false" type="submit">Add field</button>
-                  <div class="button gray" @click="showModal = false">Cancel</div>
-                </Form>
-              </:content>
-            </Modal>
           </fieldset>
           <button type="submit">Update Entity</button>
         </Form>
+        <Modal>
+          <:trigger>
+            <div class="flex float-right justify-end w-8" style="transform: translateY(-100%)">
+              <div class="button mt-4">Add field</div>
+            </div>
+          </:trigger>
+          <:content>
+            <Form for={:new_field} submit="add_field" opts={id: "new_field"}>
+              <NewField field={@new_field} />
+              <button @click="showModal = false" type="submit">Add field</button>
+              <div class="button gray" @click="showModal = false">Cancel</div>
+            </Form>
+          </:content>
+        </Modal>
       </article>
     </section>
     """
