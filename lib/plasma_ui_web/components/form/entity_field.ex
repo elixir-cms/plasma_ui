@@ -8,9 +8,9 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
   alias Surface.Components.Form.{Checkbox, Label, TextInput, Select}
   alias PlasmaUiWeb.Components.Form.{PersistenceOptions, ValidationOptions}
 
-  prop name, :string, required: true
+  prop(name, :string, required: true)
 
-  prop field, :map, required: true
+  prop(field, :map, required: true)
 
   def render(assigns) do
     ~F"""
