@@ -16,7 +16,7 @@ while [ ! -z "$1" ];do
             shift
             nix-shell shell.nix --run "mix deps.get &&
                 mix ecto.setup &&
-                yarn -cwd assets install &&
+                yarn --cwd assets install &&
                 iex -S mix phx.server"
             ;;
         dev)

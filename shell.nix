@@ -14,7 +14,7 @@ mkShell {
     yarn
   ];
   shellHook = ''
-    ./postgres-local.sh start
-    trap "./postgres-local.sh stop" EXIT
+    ./pg-local start
+    trap "./pg-local stop" EXIT
   '';
 }
