@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+show_usage () {
+    echo "Usage: Please use one of the following...\n./run setup\n./run dev\n./run build"
+    exit 1
+}
+
+if [ $# -eq 0 ];then
+    show_usage
+    exit 1
+fi
+
+while [ ! -z "$1" ];do
+    case "$1" in
+        setup)
+            shift
+            nix-shell shell.nix --run "mix deps.get &&
+                mix ecto.setup &&
+                yarn -cwd assets install &&
+                iex -S mix phx.server"
+            ;;
+        dev)
+            shift
+            nix-shell shell.nix --run "iex -S mix phx.server"
+            ;;
+        release)
+            shift
+            nix-shell shell.nix --run "echo \"$(date +%Y-%m-%d\ -\ %H:%M:%S)  Running yarn --cwd assets deploy\" &&
+                yarn --cwd assets deploy &&
+                mix deps.get --only prod &&
+                mix ecto.migrate &&
+                mix phx.digest &&
+                mix release"
+            ;;
+        *)
+            shift
+            show_usage
+            ;;
+    esac
+    shift
+done
+exit 0
