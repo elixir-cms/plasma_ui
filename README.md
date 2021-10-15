@@ -41,4 +41,4 @@ This project uses the [nix package manager](https://nixos.org/guides/install-nix
 ./run release
 ```
 
-The local development server runs on [`localhost:4001`](https://localhost:4001).
+The local development server runs on [localhost:4001](https://localhost:4001).
