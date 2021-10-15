@@ -5,6 +5,7 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
 
   use Surface.Component
   alias Surface.Components.Form.{Label, TextInput, Checkbox}
+  alias PlasmaUiWeb.Helpers.Entity, as: EntityHelper
 
   prop parent_name, :string, required: true
 
@@ -17,7 +18,7 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <Checkbox
         id={"entity_fields_#{@parent_name}_persistence_options_primary_key"}
         name={"entity[fields][#{@parent_name}][persistence_options][primary_key]"}
-        value={@options.primary_key}
+        value={EntityHelper.map_value?(@options, :primary_key)}
       />
       <Label field={"fields_#{@parent_name}_persistence_options_primary_key"} text="Primary key" />
       <br>
@@ -31,7 +32,7 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <Checkbox
         id={"entity_fields_#{@parent_name}_persistence_options_unique"}
         name={"entity[fields][#{@parent_name}][persistence_options][unique]"}
-        value={@options.unique}
+        value={EntityHelper.map_value?(@options, :unique)}
       />
       <Label field={"fields_#{@parent_name}_persistence_options_unique"} text="Unique" />
       <br>
@@ -39,7 +40,7 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <TextInput
         id={"entity_fields_#{@parent_name}_persistence_options_default"}
         name={"entity[fields][#{@parent_name}][persistence_options][default]"}
-        value={@options.default}
+        value={EntityHelper.map_value?(@options, :default)}
       />
     </fieldset>
     """

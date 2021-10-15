@@ -7,7 +7,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
   alias Surface.Components.Form
   alias PlasmaUiWeb.Components.{Accordion, Modal}
   alias PlasmaUiWeb.Components.Form.{EntityDetails, EntityField, NewField}
-  alias PlasmaUiWeb.Helpers.Entity
+  alias PlasmaUiWeb.Helpers.Entity, as: EntityHelper
   alias PlasmaUiWeb.Helpers.Store
 
   def render(assigns) do
@@ -16,7 +16,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
       <h2>Alter Entity - {@entity.label}</h2>
       <article>
         <p>Use this form to alter entity details and fields associated with the entity.</p>
-        <Form for={:entity} change="change" opts={id: "entity"}>
+        <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing />
           <fieldset class="border pb-2" form="entity" name="entity[fields]">
             <legend>Fields</legend>
@@ -73,7 +73,29 @@ defmodule PlasmaUiWeb.Entity.Alter do
     {:noreply, new_socket}
   end
 
-  def handle_event("change", %{"entity" => _params}, socket) do
+  def handle_event(
+        "submit",
+        %{
+          "entity" => %{
+            "fields" => fields,
+            "label" => label,
+            "plural" => plural,
+            "singular" => singular,
+            "source" => source
+          }
+        },
+        socket
+      ) do
+    new_entity = %{
+      :fields => EntityHelper.adapt_fields(fields),
+      :label => label,
+      :plural => plural,
+      :singular => singular,
+      :source => source
+    }
+
+    IO.inspect(new_entity)
+
     {:noreply, socket}
   end
 end
