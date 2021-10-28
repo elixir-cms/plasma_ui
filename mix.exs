@@ -28,7 +28,7 @@ defmodule PlasmaUi.MixProject do
   def catalogues do
     [
       # Local catalogue
-      "lib/plasma_ui/catalogue",
+      "lib/plasma_ui_web/catalogue",
       # Dependencies catalogues
       "deps/surface/priv/catalogue"
     ]

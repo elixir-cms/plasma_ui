@@ -41,6 +41,7 @@ config :plasma_ui, PlasmaUiWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/catalogue/.*(ex)$",
+      ~r"lib/plasma_ui_web/catalogue/.*(ex)$",
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/plasma_ui_web/(live|views)/.*(ex)$",
