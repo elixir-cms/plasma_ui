@@ -9,7 +9,7 @@ defmodule PlasmaUiWeb.Components.DataTable do
   prop(items, :list, required: true)
 
   @doc "The list of columns defining the Table"
-  slot cols, args: [item: ^items]
+  slot(cols, args: [item: ^items])
 
   def ensure_map(val) do
     if Map.has_key?(val, :__struct__), do: Map.from_struct(val), else: val
