@@ -26,4 +26,8 @@ defmodule PlasmaUiWeb.Helpers.Store do
   def put_type(type) do
     get_settings() |> Store.put_type(type)
   end
+
+  def remove_type(source) do
+    get_settings() |> Store.remove_type(source)
+  end
 end
