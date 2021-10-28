@@ -18,7 +18,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
         <p>Use this form to alter entity details and fields associated with the entity.</p>
         <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing />
-          <fieldset class="border pb-4" form="entity" name="entity[:fields]">
+          <fieldset class="border pb-6" form="entity" name="entity[:fields]">
             <legend>Fields</legend>
             <Accordion
               :for={{field_name, field} <- Map.to_list(@entity.fields)}
