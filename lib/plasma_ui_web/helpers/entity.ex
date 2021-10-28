@@ -3,28 +3,32 @@ defmodule PlasmaUiWeb.Helpers.Entity do
   A module that returns example data for an entity.
   """
 
+  def cleanup_special_values(key, value, acc) do
+    cond do
+      key == "filters" ->
+        if value[key] == "" do
+          Map.put(acc, String.to_atom(key), [])
+        else
+          Map.put(acc, String.to_atom(key), value[key])
+        end
+
+      key == "meta" ->
+        Map.put(acc, String.to_atom(key), value[key])
+
+      true ->
+        acc
+    end
+  end
+
   def convert_string_to_atom_keys(value) do
     if is_map(value) do
       value
       |> Map.keys()
       |> Enum.reduce(%{}, fn key, acc ->
-        unless key == "filters" || key == "meta" || value[key] == "" do
-          Map.put(acc, String.to_atom(key), convert_string_to_atom_keys(value[key]))
+        if key == "filters" || key == "meta" || value[key] == "" do
+          cleanup_special_values(key, value, acc)
         else
-          cond do
-            key == "filters" ->
-              if value[key] == "" do
-                Map.put(acc, String.to_atom(key), [])
-              else
-                Map.put(acc, String.to_atom(key), value[key])
-              end
-
-            key == "meta" ->
-              Map.put(acc, String.to_atom(key), value[key])
-
-            true ->
-              acc
-          end
+          Map.put(acc, String.to_atom(key), convert_string_to_atom_keys(value[key]))
         end
       end)
     else
