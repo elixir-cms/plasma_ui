@@ -15,10 +15,10 @@
         <nav role="navigation">
           <ul>
             <li>
-              <%= link "Home", to: Routes.live_path(@conn, :index) %>
+              <%= live_patch "Home", to: Routes.live_path(@conn, :index) %>
             </li>
             <li>
-              <%= link "Create Entity", to: Routes.live_path(@conn, PlasmaUiWeb.Entity.Create) %>
+              <%= live_patch "Create Entity", to: Routes.live_path(@conn, PlasmaUiWeb.Entity.Create) %>
             </li>
           </ul>
         </nav>

@@ -4,6 +4,7 @@ defmodule PlasmaUiWeb.Components.DataTable do
   """
 
   use Surface.Component, slot: "cols"
+  alias Surface.Components.LivePatch
 
   @doc "The list of items to be rendered"
   prop(items, :list, required: true)
@@ -33,9 +34,9 @@ defmodule PlasmaUiWeb.Components.DataTable do
             {#for column <- @cols, field = String.to_atom(column.field), item = ensure_map(item)}
               <td>
                 {#if field == :label}
-                  <a href={"/entity/" <> column.filter.(item[:source]) <> "/alter"}>
+                  <LivePatch to={"/entity/" <> column.filter.(item[:source]) <> "/alter"}>
                     {column.filter.(item[field])}
-                  </a>
+                  </LivePatch>
                 {#else}
                   {column.filter.(item[field])}
                 {/if}
