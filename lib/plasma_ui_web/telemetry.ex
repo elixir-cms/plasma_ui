@@ -2,6 +2,10 @@ defmodule PlasmaUiWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
+  @moduledoc """
+  A module that starts the telemetry poller and defines metrics to track.
+  """
+
   def start_link(arg) do
     Supervisor.start_link(__MODULE__, arg, name: __MODULE__)
   end
