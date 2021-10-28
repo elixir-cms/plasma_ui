@@ -14,7 +14,7 @@ defmodule PlasmaUiWeb.Entity.List do
       <article>
         <p>The table below shows a list of all available entities. Click on an entity title to alter it.</p>
         <DataTable items={@entities}>
-          <Column field="label"><a href="/edit">Edit</a></Column>
+          <Column field="label" />
           <Column field="source" />
           <Column field="singular" />
           <Column field="plural" />
