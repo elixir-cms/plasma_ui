@@ -1,6 +1,11 @@
 defmodule PlasmaUiWeb.Components.DataTable do
   @moduledoc """
-  TODO
+  Takes a single prop, items, that is a list of enumerables in the form of maps or structs
+  that are used as rows for each of the supplied column slots in a table.
+
+  This particular version of what could become a more generic component contains a special
+  conditional logic block that wraps the column content for the :source key in a live patch
+  to the alter entity route used by PlasmaUiWeb.
   """
 
   use Surface.Component, slot: "cols"
