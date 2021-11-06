@@ -50,6 +50,7 @@ defmodule PlasmaUi.MixProject do
       {:ecto_sql, "~> 3.4"},
       {:floki, ">= 0.27.0", only: :test},
       {:gettext, "~> 0.11"},
+      {:hound, "~> 1.0", only: :test},
       {:jason, "~> 1.0"},
       {:phoenix, "~> 1.5.8"},
       {:phoenix_ecto, "~> 4.1"},

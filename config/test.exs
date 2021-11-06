@@ -20,3 +20,6 @@ config :plasma_ui, PlasmaUiWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# Hound
+config :hound, driver: "chrome_driver", browser: "chrome_headless"

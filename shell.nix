@@ -5,6 +5,8 @@ with pkgs;
 mkShell {
   name = "elixirShell";
   buildInputs = [
+    chromium
+    chromedriver
     erlangR24
     pkgs.beam.packages.erlangR24.elixir
     inotify-tools
