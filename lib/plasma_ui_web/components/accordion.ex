@@ -15,12 +15,12 @@ defmodule PlasmaUiWeb.Components.Accordion do
 
   def(render(assigns)) do
     ~F"""
-    <div x-data="{ open: 0 }" style={@style}>
-      <div @click="open = !open" class="accordion">
+    <div class="accordion" style={@style} x-data="{ open: 0 }">
+      <div @click="open = !open" class="title">
         <p>{@title}</p>
         <span :class="open == 1 ? 'fa-chevron-down' : 'fa-chevron-up'" class="fas" />
       </div>
-      <div x-show="open == 1" class="border p-4">
+      <div class="content border p-4" x-show="open == 1">
         <#slot />
       </div>
     </div>
