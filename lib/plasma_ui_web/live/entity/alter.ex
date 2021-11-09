@@ -96,7 +96,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
       :source => source
     }
 
-    IO.inspect(new_entity)
 
     {:noreply, socket}
   end
