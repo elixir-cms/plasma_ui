@@ -15,8 +15,4 @@ mkShell {
     rebar3
     yarn
   ];
-  shellHook = ''
-    ./pg-local start
-    trap "./pg-local stop" EXIT
-  '';
 }
