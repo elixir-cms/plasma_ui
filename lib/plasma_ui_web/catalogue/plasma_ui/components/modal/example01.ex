@@ -1,4 +1,8 @@
 defmodule PlasmaUiWeb.Components.Modal.Example01 do
+  @moduledoc """
+  A surface catalogue example component for PlasmaUiWeb.Components.Modal.
+  """
+
   use Surface.Catalogue.Example,
     catalogue: PlasmaUiWeb.Components.Catalogue,
     subject: PlasmaUiWeb.Components.Modal,
