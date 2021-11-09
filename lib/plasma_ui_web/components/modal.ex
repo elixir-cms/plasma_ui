@@ -10,14 +10,14 @@ defmodule PlasmaUiWeb.Components.Modal do
 
   def(render(assigns)) do
     ~F"""
-    <div @keydown.escape.window="showModal = false" x-data="{ 'showModal': false }">
-      <div @click="showModal = true">
+    <div class="modal" @keydown.escape.window="showModal = false" x-data="{ 'showModal': false }">
+      <div class="trigger" @click="showModal = true">
         <#slot name="trigger" />
       </div>
-      <div class="fixed flex inset-0 items-center justify-center min-h-screen" x-show="showModal">
+      <div class="content fixed flex inset-0 items-center justify-center min-h-screen" x-show="showModal">
         <div
           @click="showModal = false"
-          class="absolute bg-black bg-opacity-50 inset-0 z-40"
+          class="overlay absolute bg-black bg-opacity-50 inset-0 z-40"
           x-show="showModal"
           x-transition:enter="transition ease-out duration-200"
           x-transition:enter-start="opacity-0"
