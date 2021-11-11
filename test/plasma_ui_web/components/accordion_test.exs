@@ -8,7 +8,6 @@ defmodule PlasmaUiWeb.Components.AccordionTest do
 
   alias PlasmaUiWeb.Components.Accordion
   alias Surface.Catalogue.Util
-  @base_url "http://localhost.test:4002/catalogue/examples/"
 
   hound_session()
 
@@ -18,21 +17,6 @@ defmodule PlasmaUiWeb.Components.AccordionTest do
     for {_, component} <- examples_and_playgrounds, example <- component.examples, do: example
   end
 
-  def example_url(module, opts) do
-    base_url = Keyword.fetch!(opts, :base_url) |> URI.parse()
-    path = Path.join(base_url.path, to_string(module))
-    %URI{base_url | path: path}
-  end
-
-  def get_example_refs(opts) do
-    list_examples()
-    |> Enum.map(fn example ->
-      example
-      |> example_url(opts)
-      |> IO.inspect(opts)
-    end)
-  end
-
   test "displayed title and slot content" do
     html =
       render_surface do
@@ -40,8 +24,6 @@ defmodule PlasmaUiWeb.Components.AccordionTest do
         <Accordion title="Hello">World</Accordion>
         """
       end
-
-    get_example_refs(base_url: @base_url)
 
     assert html =~ "<p>Hello</p>"
     assert html =~ "World"
