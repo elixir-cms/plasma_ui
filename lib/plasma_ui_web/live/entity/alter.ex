@@ -99,4 +99,9 @@ defmodule PlasmaUiWeb.Entity.Alter do
 
     {:noreply, socket}
   end
+
+  def handle_event(_, val, socket) do
+    IO.inspect(val)
+    {:noreply, socket}
+  end
 end
