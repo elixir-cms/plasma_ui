@@ -21,7 +21,8 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <TextInput
         id={"entity_fields_#{@name}_field_type"}
         name={"entity[fields][#{@name}][field_type]"}
-        opts={[readonly: true, placeholder: "Field type"]}
+        opts={[placeholder: "Field type", readonly: true, tabindex: "-1"]}
+
         value={@field.field_type}
       />
       <Label text="Storage type" />
