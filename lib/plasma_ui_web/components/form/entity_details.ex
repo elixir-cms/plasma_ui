@@ -25,7 +25,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
       <TextInput
         id="entity_source"
         name="entity[source]"
-        opts={[phx_blur: "source", style: source_style, required: true]}
+        opts={[style: source_style, required: true]}
         value={@entity.source}
       />
       <Label field="singular" />

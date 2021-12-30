@@ -23,6 +23,14 @@ while [ ! -z "$1" ];do
             shift
             nix-shell --run "iex -S mix phx.server"
             ;;
+        chromedrv)
+            shift
+            nix-shell --run chromedriver &
+            ;;
+        pg)
+            shift
+            nix-shell --run "sh ./pg-local start"
+            ;;
         release)
             shift
             nix-shell --run "echo \"$(date +%Y-%m-%d\ -\ %H:%M:%S)  Running yarn --cwd assets deploy\" &&

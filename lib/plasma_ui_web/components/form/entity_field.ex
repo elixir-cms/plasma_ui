@@ -38,7 +38,10 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <Checkbox
         id={"entity_fields_#{@name}_validation_options_required"}
         name={"entity[fields][#{@name}][validation_options][required]"}
-        opts={[phx_blur: "blur", phx_value_field: "#{@name}", phx_value_option: "validation_options_required"]}
+        opts={[phx_blur: "blur",
+           phx_value_fieldname: "#{@name}",
+           phx_value_key: "validation_options",
+           phx_value_subkey: "required" ]}
         value={if @field.validation_options == %{}, do: false, else: @field.validation_options.required}
       />
       <Label field={"fields_#{@name}_validation_options_required"} text="Required Field" />
@@ -46,7 +49,10 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
       <Checkbox
         id={"entity_fields_#{@name}_persistence_options_indexed"}
         name={"entity[fields][#{@name}][persistence_options][indexed]"}
-        opts={[phx_blur: "blur", phx_value_field: "#{@name}", phx_value_option: "persistence_options_indexed"]}
+        opts={[phx_blur: "blur",
+           phx_value_fieldname: "#{@name}",
+           phx_value_key: "persistence_options",
+           phx_value_subkey: "indexed" ]}
         value={EntityHelper.map_value?(@field.persistence_options, :indexed)}
       />
       <Label field={"fields_#{@name}_persistence_options_indexed"} text="Enable Sorting & Filtering" />
@@ -63,7 +69,10 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
           <TextInput
             id={"entity_fields_#{@name}_filters"}
             name={"entity[fields][#{@name}][filters]"}
-            opts={[phx_blur: "blur", phx_value_field: "#{@name}", phx_value_option: "filters", placeholder: "Filters"]}
+            opts={[phx_blur: "blur",
+               phx_value_fieldname: "#{@name}",
+               phx_value_key: "filters",
+               placeholder: "Filters"]}
             value={@field.filters}
           />
         </fieldset>
@@ -77,7 +86,10 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
                 <TextInput
                   id={"entity_fields_#{@name}_meta_#{key}_#{key2}"}
                   name={"entity[fields][#{@name}][meta][#{key}][#{key2}]"}
-                  opts={[phx_blur: "blur", phx_value_field: "#{@name}", phx_value_option: "#{key}", placeholder: key2]}
+                  opts={[phx_blur: "blur",
+                     phx_value_fieldname: "#{@name}",
+                     phx_value_key: "#{key}",
+                     placeholder: key2 ]}
                   value={@field.meta[key][key2]}
                 />
               {/for}

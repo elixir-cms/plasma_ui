@@ -18,7 +18,10 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <Checkbox
         id={"entity_fields_#{@parent_name}_persistence_options_primary_key"}
         name={"entity[fields][#{@parent_name}][persistence_options][primary_key]"}
-        opts={[phx_blur: "blur", phx_value_field: "#{@parent_name}", phx_value_option: "persistence_options_primary_key"]}
+        opts={[phx_blur: "blur",
+               phx_value_fieldname: "#{@parent_name}",
+               phx_value_key: "persistence_options",
+               phx_value_subkey: "primary_key"]}
         value={EntityHelper.map_value?(@options, :primary_key)}
       />
       <Label field={"fields_#{@parent_name}_persistence_options_primary_key"} text="Primary key" />
@@ -26,7 +29,10 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <Checkbox
         id={"entity_fields_#{@parent_name}_persistence_options_nullable"}
         name={"entity[fields][#{@parent_name}][persistence_options][nullable]"}
-        opts={[phx_blur: "blur", phx_value_field: "#{@parent_name}", phx_value_option: "persistence_options_nullable"]}
+        opts={[phx_blur: "blur",
+               phx_value_fieldname: "#{@parent_name}",
+               phx_value_key: "persistence_options",
+               phx_value_subkey: "nullable"]}
         value={@options.nullable}
       />
       <Label field={"fields_#{@parent_name}_persistence_options_nullable"} text="Nullable" />
@@ -34,7 +40,10 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <Checkbox
         id={"entity_fields_#{@parent_name}_persistence_options_unique"}
         name={"entity[fields][#{@parent_name}][persistence_options][unique]"}
-        opts={[phx_blur: "blur", phx_value_field: "#{@parent_name}", phx_value_option: "persistence_options_unique"]}
+        opts={[phx_blur: "blur",
+               phx_value_fieldname: "#{@parent_name}",
+               phx_value_key: "persistence_options",
+               phx_value_subkey: "unique"]}
         value={EntityHelper.map_value?(@options, :unique)}
       />
       <Label field={"fields_#{@parent_name}_persistence_options_unique"} text="Unique" />
@@ -43,7 +52,10 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
       <TextInput
         id={"entity_fields_#{@parent_name}_persistence_options_default"}
         name={"entity[fields][#{@parent_name}][persistence_options][default]"}
-        opts={[phx_blur: "blur", phx_value_field: "#{@parent_name}", phx_value_option: "persistence_options_default"]}
+        opts={[phx_blur: "blur",
+               phx_value_fieldname: "#{@parent_name}",
+               phx_value_key: "persistence_options",
+               phx_value_subkey: "default"]}
         value={EntityHelper.map_value?(@options, :default)}
       />
     </fieldset>

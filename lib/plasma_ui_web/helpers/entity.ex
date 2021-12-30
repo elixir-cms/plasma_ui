@@ -15,8 +15,18 @@ defmodule PlasmaUiWeb.Helpers.Entity do
       key == "meta" ->
         Map.put(acc, String.to_atom(key), value[key])
 
-      true ->
+      value[key] == "" ->
         acc
+
+      key == "validation_options" ->
+        if convert_string_to_atom_keys(value[key]) == %{required: false} do
+          Map.put(acc, String.to_atom(key), %{})
+        else
+          Map.put(acc, String.to_atom(key), convert_string_to_atom_keys(value[key]))
+        end
+
+      true ->
+        Map.put(acc, String.to_atom(key), convert_string_to_atom_keys(value[key]))
     end
   end
 
@@ -24,13 +34,7 @@ defmodule PlasmaUiWeb.Helpers.Entity do
     if is_map(value) do
       value
       |> Map.keys()
-      |> Enum.reduce(%{}, fn key, acc ->
-        if key == "filters" || key == "meta" || value[key] == "" do
-          cleanup_special_values(key, value, acc)
-        else
-          Map.put(acc, String.to_atom(key), convert_string_to_atom_keys(value[key]))
-        end
-      end)
+      |> Enum.reduce(%{}, fn key, acc -> cleanup_special_values(key, value, acc) end)
     else
       cond do
         value == "true" ->

@@ -4,6 +4,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
   """
 
   use Surface.LiveView
+  alias EctoEntity.Type
   alias Surface.Components.Form
   alias PlasmaUiWeb.Components.{Accordion, Modal}
   alias PlasmaUiWeb.Components.Form.{EntityDetails, EntityField, NewField}
@@ -13,8 +14,8 @@ defmodule PlasmaUiWeb.Entity.Alter do
   def render(assigns) do
     ~F"""
     <section>
-      <h2>Alter Entity - {@entity.label}</h2>
       <article>
+        <h2>Alter Entity - {@entity.label}</h2>
         <p>Use this form to alter entity details and fields associated with the entity.</p>
         <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing />
@@ -27,7 +28,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
               <EntityField field={field} name={field_name} />
             </Accordion>
           </fieldset>
-          <button type="submit">Update Entity</button>
+          <button id="update-entity" type="submit">Update Entity</button>
         </Form>
         <Modal>
           <:trigger>
@@ -60,9 +61,22 @@ defmodule PlasmaUiWeb.Entity.Alter do
       socket
       |> assign(:original_entity, entity)
       |> assign(:entity, entity)
+      |> assign(:changes, [])
       |> assign(:new_field, EntityHelper.get_new_field())
 
     {:ok, initial_socket}
+  end
+
+  defp merge_key(acc, key, value) do
+    clean_val =
+      case value do
+        "true" -> true
+        nil -> false
+        _ -> false
+      end
+
+    keyword = Keyword.new() |> Keyword.put_new(key, clean_val)
+    Keyword.merge(acc, keyword)
   end
 
   def handle_event("add_field", %{"new_field" => field}, socket) do
@@ -80,33 +94,155 @@ defmodule PlasmaUiWeb.Entity.Alter do
     {:noreply, new_socket}
   end
 
-  def handle_event(
-        "submit",
-        %{
-          "entity" => %{
-            "fields" => fields,
-            "label" => label,
-            "plural" => plural,
-            "singular" => singular,
-            "source" => source
-          }
-        },
-        socket
-      ) do
-    new_entity = %{
-      :fields => EntityHelper.adapt_fields(fields),
-      :label => label,
-      :plural => plural,
-      :singular => singular,
-      :source => source
-    }
+  def handle_event("submit", _, socket) do
+    type = socket.assigns.entity
 
+    socket.assigns.changes
+    |> Enum.reduce(%{}, fn change, acc ->
+      fieldname = change[:fieldname]
+      existing_changes = acc[fieldname]
+      new_change = Map.delete(change, :fieldname)
+
+      if is_list(existing_changes) do
+        field_changes = Map.put(%{}, fieldname, Enum.concat(existing_changes, [new_change]))
+        Map.merge(acc, field_changes)
+      else
+        Map.put(acc, fieldname, [new_change])
+      end
+    end)
+    |> Enum.map(fn {fieldname, field_changes} ->
+      changeset =
+        field_changes
+        |> Enum.reduce(Keyword.new(), fn %{key: _, subkey: subkey, value: value}, acc ->
+          case subkey do
+            :primary_key ->
+              IO.puts("unhandled :primary_key change to #{value}")
+              acc
+
+            _ ->
+              merge_key(acc, subkey, value)
+          end
+        end)
+
+      {fieldname, changeset}
+    end)
+    |> Enum.reduce(type, fn {fieldname, changeset}, acc ->
+      Type.alter_field!(acc, fieldname, changeset)
+    end)
+    |> Store.put_type()
 
     {:noreply, socket}
   end
 
-  def handle_event(_, val, socket) do
-    IO.inspect(val)
+  def handle_event("blur", val, socket) do
+    fieldname = val["fieldname"]
+    field = socket.assigns.entity.fields["#{fieldname}"]
+
+    if is_map(field) do
+      key = String.to_atom(val["key"])
+      field_key = field |> Map.fetch(key) |> elem(1)
+      subkey = String.to_atom(val["subkey"])
+      value = val["value"]
+
+      cond do
+        is_nil(subkey) ->
+          if field_key != value do
+            new_socket =
+              socket
+              |> assign(
+                :changes,
+                Enum.concat([
+                  socket.assigns.changes,
+                  [%{fieldname: fieldname, key: key, value: value}]
+                ])
+              )
+
+            {:noreply, new_socket}
+          else
+            {:noreply, socket}
+          end
+
+        not is_nil(val["subkey"]) and Map.has_key?(field_key, subkey) ->
+          field_subkey = field_key |> Map.fetch(subkey) |> elem(1)
+
+          if not (field_subkey == value or (field_subkey and value == "true") or
+                    (!field_subkey and value == nil)) do
+            new_socket =
+              socket
+              |> assign(
+                :changes,
+                Enum.concat(
+                  socket.assigns.changes,
+                  [
+                    %{
+                      fieldname: fieldname,
+                      key: key,
+                      subkey: subkey,
+                      value: value
+                    }
+                  ]
+                )
+              )
+
+            {:noreply, new_socket}
+          else
+            {:noreply, socket}
+          end
+
+        is_map(field_key) and not Map.has_key?(field_key, subkey) ->
+          if field_key == value or (!!value and value != "") do
+            new_socket =
+              socket
+              |> assign(
+                :changes,
+                Enum.concat(
+                  socket.assigns.changes,
+                  [
+                    %{
+                      fieldname: fieldname,
+                      key: key,
+                      subkey: subkey,
+                      value: value
+                    }
+                  ]
+                )
+              )
+
+            {:noreply, new_socket}
+          else
+            {:noreply, socket}
+          end
+
+        true ->
+          IO.inspect('no match')
+          {:noreply, socket}
+      end
+    else
+      {:noreply, socket}
+    end
+  end
+
+  def handle_event("label", val, socket) do
+    if socket.assigns.entity.label != val["value"] do
+      IO.inspect("label changed to #{val}")
+    end
+
+    {:noreply, socket}
+  end
+
+  def handle_event("singular", val, socket) do
+    if socket.assigns.entity.singular != val["value"] do
+      IO.inspect("singular changed to #{val}")
+    end
+
+    {:noreply, socket}
+  end
+
+  def handle_event("plural", val, socket) do
+    if socket.assigns.entity.plural != val["value"] do
+      IO.inspect("plural changed to #{val}")
+    end
+
     {:noreply, socket}
   end
 end

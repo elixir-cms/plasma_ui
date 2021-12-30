@@ -5,6 +5,7 @@ section {
   margin: 0 auto;
   max-width: 768px;
 }
+section article { @apply px-8 lg:px-0; }
 
 /* Forms */
 form { margin-bottom: 0; }
@@ -20,8 +21,9 @@ form > fieldset > input[style*="background-image: url"] {
 }
 fieldset legend { @apply text-3xl }
 fieldset.border > legend { @apply border-8 border-white -mb-3.5 -ml-3.5 }
-input[type="checkbox"] + label { @apply font-normal inline }
-select[readonly] {pointer-events: none;}
+input[type="checkbox"] + label { @apply cursor-pointer font-normal inline }
+[readonly] { @apply cursor-not-allowed }
+select[readonly] { @apply pointer-events-none }
 
 /* Buttons */
 .button.gray { @apply bg-gray-400 border-gray-400 }
