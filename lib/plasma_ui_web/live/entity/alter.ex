@@ -67,15 +67,27 @@ defmodule PlasmaUiWeb.Entity.Alter do
     {:ok, initial_socket}
   end
 
-  defp merge_key(acc, key, value) do
-    clean_val =
-      case value do
-        "true" -> true
-        nil -> false
-        _ -> false
-      end
+  defp clean_val(value) do
+    case value do
+      true ->
+        true
 
-    keyword = Keyword.new() |> Keyword.put_new(key, clean_val)
+      false ->
+        false
+
+      "true" ->
+        true
+
+      nil ->
+        false
+
+      _ ->
+        value
+    end
+  end
+
+  defp merge_key(acc, key, value) do
+    keyword = Keyword.new() |> Keyword.put_new(key, clean_val(value))
     Keyword.merge(acc, keyword)
   end
 
@@ -119,6 +131,20 @@ defmodule PlasmaUiWeb.Entity.Alter do
               IO.puts("unhandled :primary_key change to #{value}")
               acc
 
+            :indexed ->
+              if clean_val(value),
+                do: merge_key(acc, :add_index, true),
+                else: merge_key(acc, :drop_index, true)
+
+            :nullable ->
+              merge_key(acc, :make_nullable, value)
+
+            :unique ->
+              merge_key(acc, :remove_uniqueness, value)
+
+            :default ->
+              merge_key(acc, :set_default, value)
+
             _ ->
               merge_key(acc, subkey, value)
           end
@@ -127,6 +153,8 @@ defmodule PlasmaUiWeb.Entity.Alter do
       {fieldname, changeset}
     end)
     |> Enum.reduce(type, fn {fieldname, changeset}, acc ->
+      IO.inspect(fieldname)
+      IO.inspect(changeset)
       Type.alter_field!(acc, fieldname, changeset)
     end)
     |> Store.put_type()
