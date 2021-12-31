@@ -91,16 +91,26 @@ defmodule PlasmaUiWeb.Entity.Alter do
     Keyword.merge(acc, keyword)
   end
 
-  def handle_event("add_field", %{"new_field" => field}, socket) do
-    entity = socket.assigns.entity
-
-    new_field =
-      field
-      |> Map.merge(socket.assigns.new_field)
-      |> Map.delete("field_name")
-
+  def handle_event(
+        "add_field",
+        %{
+          "new_field" => %{
+            "field_name" => field_name,
+            "field_type" => field_type,
+            "storage_type" => storage_type
+          }
+        },
+        socket
+      ) do
     new_entity =
-      Map.put(entity, :fields, Map.put_new(entity.fields, field["field_name"], new_field))
+      socket.assigns.entity
+      |> Type.add_field!(field_name, field_type, storage_type,
+        nullable: false,
+        indexed: false,
+        unique: true,
+        required: true,
+        length: %{max: 200}
+      )
 
     new_socket = socket |> assign(:entity, new_entity)
     {:noreply, new_socket}
