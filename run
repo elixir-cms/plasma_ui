@@ -24,7 +24,7 @@ while [ ! -z "$1" ];do
                 echo \"export LOG_PATH=\$PWD/pg-localhost/LOG\" >> .envrc &&
                 echo \"export PGDATABASE=postgres\" >> .envrc &&
                 echo \"export PGUSER=postgres\" >> .envrc &&
-                echo \"export DATABASE_URL=\"postgresql:///postgres?host=\$PGHOST\"\" >> .envrc &&
+                echo \"export DATABASE_URL=\"postgresql:///postgres?host=\$PWD/pg-localhost\"\" >> .envrc &&
                 sh ./pg-local start &
                 mix local.hex --force
                 mix local.rebar --force
