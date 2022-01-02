@@ -26,6 +26,8 @@ while [ ! -z "$1" ];do
                 echo \"export PGUSER=postgres\" >> .envrc &&
                 echo \"export DATABASE_URL=\"postgresql:///postgres?host=\$PGHOST\"\" >> .envrc &&
                 sh ./pg-local start &
+                mix local.hex --force
+                mix local.rebar --force
                 mix deps.get &&
                 mix ecto.setup &&
                 yarn --cwd assets install &&

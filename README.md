@@ -1,6 +1,6 @@
 # Plasma UI
 
-Plasma UI is a Phoenix based user interface for manipulating entity types with the ecto_entity library.
+Plasma UI is a Phoenix based user interface for manipulating entity types with the [ecto_entity](https://github.com/elixir-cms/ecto_entity) library.
 
 **WARNING:** This is a work in progress that is still in very early stages. You probably shouldn't use it.
 
