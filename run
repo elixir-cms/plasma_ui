@@ -39,8 +39,8 @@ while [ ! -z "$1" ];do
                 echo \"export PGDATABASE=postgres\" >> .envrc &&
                 echo \"export PGUSER=postgres\" >> .envrc &&
                 echo \"export DATABASE_URL=\"postgresql:///postgres?host=\$PWD/pg-localhost\"\" >> .envrc &&
-                source .envrc &&
                 sh ./pg-local start &
+                source .envrc &&
                 mix local.hex --force
                 mix local.rebar --force
                 mix deps.get &&
