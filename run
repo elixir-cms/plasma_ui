@@ -19,12 +19,28 @@ while [ ! -z "$1" ];do
     case "$1" in
         setup)
             shift
-            nix-shell --run "echo \"export PGDATA=\$PWD/pg-data\" > .envrc &&
+            nix-shell --run "echo \"LANG=en_US.UTF-8\" > .envrc &&
+                echo \"LANG=en_US.UTF-8\" >> .envrc &&
+                echo \"LC_CTYPE=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_NUMERIC=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_TIME=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_COLLATE=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_MONETARY=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_MESSAGES=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_PAPER=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_NAME=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_ADDRESS=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_TELEPHONE=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_MEASUREMENT=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_IDENTIFICATION=\"en_US.UTF-8\" >> .envrc &&
+                echo \"LC_ALL=\" >> .envrc &&
+                echo \"export PGDATA=\$PWD/pg-data\" >> .envrc &&
                 echo \"export PGHOST=\$PWD/pg-localhost\" >> .envrc &&
                 echo \"export LOG_PATH=\$PWD/pg-localhost/LOG\" >> .envrc &&
                 echo \"export PGDATABASE=postgres\" >> .envrc &&
                 echo \"export PGUSER=postgres\" >> .envrc &&
                 echo \"export DATABASE_URL=\"postgresql:///postgres?host=\$PWD/pg-localhost\"\" >> .envrc &&
+                source .envrc &&
                 sh ./pg-local start &
                 mix local.hex --force
                 mix local.rebar --force
