@@ -19,7 +19,13 @@ while [ ! -z "$1" ];do
     case "$1" in
         setup)
             shift
-            nix-shell --run "sh ./pg-local start &
+            nix-shell --run "echo \"export PGDATA=\$PWD/pg-data\" > .envrc &&
+                echo \"export PGHOST=\$PWD/pg-localhost\" >> .envrc &&
+                echo \"export LOG_PATH=\$PWD/pg-localhost/LOG\" >> .envrc &&
+                echo \"export PGDATABASE=postgres\" >> .envrc &&
+                echo \"export PGUSER=postgres\" >> .envrc &&
+                echo \"export DATABASE_URL=\"postgresql:///postgres?host=\$PGHOST\"\" >> .envrc &&
+                sh ./pg-local start &
                 mix deps.get &&
                 mix ecto.setup &&
                 yarn --cwd assets install &&
