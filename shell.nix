@@ -9,7 +9,6 @@ mkShell {
     chromedriver
     erlangR24
     pkgs.beam.packages.erlangR24.elixir
-    glibcLocales
     inotify-tools
     postgresql
     nodejs-12_x
