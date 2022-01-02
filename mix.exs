@@ -46,7 +46,8 @@ defmodule PlasmaUi.MixProject do
     [
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:ecto_entity, path: "../ecto_entity"},
+      # {:ecto_entity, path: "../ecto_entity"},
+      {:ecto_entity, git: "git://github.com/elixir-cms/ecto_entity.git"},
       {:ecto_sql, "~> 3.4"},
       {:floki, ">= 0.27.0", only: :test},
       {:gettext, "~> 0.11"},

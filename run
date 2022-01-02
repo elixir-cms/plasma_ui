@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 show_usage () {
-    echo "Usage: Please use one of the following...\n./run setup\n./run dev\n./run build"
+    echo "Usage: Please use one of the following:
+./run setup
+./run dev
+./run credo
+./run test
+./run release"
     exit 1
 }
 
@@ -14,26 +19,20 @@ while [ ! -z "$1" ];do
     case "$1" in
         setup)
             shift
-            nix-shell --run "mix deps.get &&
+            nix-shell --run "sh ./pg-local start &
+                mix deps.get &&
                 mix ecto.setup &&
                 yarn --cwd assets install &&
                 iex -S mix phx.server"
             ;;
         dev)
             shift
-            nix-shell --run "iex -S mix phx.server"
-            ;;
-        chromedrv)
-            shift
-            nix-shell --run chromedriver &
-            ;;
-        pg)
-            shift
-            nix-shell --run "sh ./pg-local start"
+            nix-shell --run "sh ./pg-local start &
+                iex -S mix phx.server"
             ;;
         release)
             shift
-            nix-shell --run "echo \"$(date +%Y-%m-%d\ -\ %H:%M:%S)  Running yarn --cwd assets deploy\" &&
+            nix-shell --run "sh ./pg-local start &
                 yarn --cwd assets deploy &&
                 mix deps.get --only prod &&
                 mix ecto.migrate &&
@@ -46,7 +45,7 @@ while [ ! -z "$1" ];do
             ;;
         test)
             shift
-            nix-shell --run "mix test"
+            nix-shell --run "chromedriver & mix test"
             ;;
         *)
             shift
