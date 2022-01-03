@@ -19,7 +19,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
       <TextInput
         id="entity_label"
         name="entity[label]"
-        opts={[phx_blur: "label", required: true]}
+        opts={[required: true]}
         value={@entity.label} />
       <Label field="source" opts={[style: source_style]} />
       <TextInput
@@ -32,14 +32,14 @@ defmodule PlasmaUiWeb.Components.Form.EntityDetails do
       <TextInput
         id="entity_singular"
         name="entity[singular]"
-        opts={[phx_blur: "singular", required: true]}
+        opts={[required: true]}
         value={@entity.singular}
       />
       <Label field="plural" />
       <TextInput
         id="entity_plural"
         name="entity[plural]"
-        opts={[phx_blur: "plural", required: true]}
+        opts={[required: true]}
         value={@entity.plural}
       />
     </fieldset>
