@@ -170,8 +170,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
       {fieldname, changeset}
     end)
     |> Enum.reduce(type, fn {fieldname, changeset}, acc ->
-      IO.inspect(fieldname)
-      IO.inspect(changeset)
       Type.alter_field!(acc, fieldname, changeset)
     end)
     |> Store.put_type()
@@ -187,7 +185,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
   end
 
   def handle_info(:clear_flash, socket) do
-    IO.inspect("clearing!")
     {:noreply, socket |> clear_flash}
   end
 
@@ -281,7 +278,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
 
   def handle_event("label", val, socket) do
     if socket.assigns.entity.label != val["value"] do
-      IO.inspect("label changed to #{val}")
+      IO.inspect("label changed #{val}")
     end
 
     {:noreply, socket}
