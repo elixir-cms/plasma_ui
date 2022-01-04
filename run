@@ -37,17 +37,19 @@ while [ ! -z "$1" ];do
         dev)
             shift
             nix-shell --run "sh ./pg-local start &
+                source .envrc &&
                 iex -S mix phx.server"
             ;;
         release)
             shift
-            nix-shell --run "sh ./pg-local start &
+                nix-shell --run "sh ./pg-local start &
+                source .envrc &&
                 yarn --cwd assets deploy &&
                 mix deps.get --only prod &&
                 mix ecto.migrate &&
                 mix phx.digest &&
                 mix release"
-            ;;
+                ;;
         credo)
             shift
             nix-shell --run "mix credo"

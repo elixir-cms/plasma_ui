@@ -115,11 +115,16 @@ defmodule PlasmaUiWeb.Entity.Alter do
         nullable: false,
         indexed: false,
         unique: true,
-        required: true,
-        length: %{max: 200}
+        required: true
+        # length: %{max: 200}
       )
 
-    new_socket = socket |> assign(:entity, new_entity)
+    new_socket =
+      socket
+      |> assign(:entity, new_entity)
+      |> put_flash(:info, "Field added!")
+      |> push_event("scrollToTop", %{})
+
     {:noreply, new_socket}
   end
 
