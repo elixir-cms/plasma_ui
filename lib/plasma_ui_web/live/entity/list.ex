@@ -10,8 +10,8 @@ defmodule PlasmaUiWeb.Entity.List do
   def render(assigns) do
     ~F"""
     <section>
-      <h2>Entities</h2>
       <article>
+        <h2>Entities</h2>
         <p>The table below shows a list of all available entities. Click on an entity title to alter it.</p>
         <DataTable items={@entities}>
           <Column field="label" />

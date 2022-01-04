@@ -14,7 +14,14 @@ defmodule PlasmaUiWeb.Entity.Alter do
   def render(assigns) do
     ~F"""
     <section>
-      <article>
+      <p class="alert alert-info" role="alert"
+         phx-click="lv:clear-flash"
+         phx-value-key="info">{ live_flash(@flash, :info) }</p>
+
+      <p class="alert alert-danger" role="alert"
+         phx-click="lv:clear-flash"
+         phx-value-key="error">{ live_flash(@flash, :error) }</p>
+      <article id="alter" phx-hook="Alter">
         <h2>Alter Entity - {@entity.label}</h2>
         <p>Use this form to alter entity details and fields associated with the entity.</p>
         <Form for={:entity} submit="submit" opts={id: "entity"}>
@@ -169,7 +176,19 @@ defmodule PlasmaUiWeb.Entity.Alter do
     end)
     |> Store.put_type()
 
-    {:noreply, socket}
+    new_socket =
+      socket
+      |> put_flash(:info, "Entity updated!")
+      |> push_event("scrollToTop", %{})
+
+    Process.send_after(self(), :clear_flash, 5000, [])
+
+    {:noreply, new_socket}
+  end
+
+  def handle_info(:clear_flash, socket) do
+    IO.inspect("clearing!")
+    {:noreply, socket |> clear_flash}
   end
 
   def handle_event("blur", val, socket) do

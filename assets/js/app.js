@@ -23,6 +23,15 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 let csrfToken = document
     .querySelector("meta[name='csrf-token']")
     .getAttribute('content')
+let Hooks = {}
+Hooks.scrollToTop = {}
+Hooks.Alter = {
+  mounted() {
+    this.handleEvent('scrollToTop', () =>
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    )
+  }
+}
 let liveSocket = new LiveSocket('/live', Socket, {
   params: { _csrf_token: csrfToken },
   dom: {
@@ -31,7 +40,8 @@ let liveSocket = new LiveSocket('/live', Socket, {
         Alpine.clone(from.__x, to)
       }
     }
-  }
+  },
+  hooks: Hooks
 })
 
 // Show progress bar on live navigation and form submits
