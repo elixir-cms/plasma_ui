@@ -5,6 +5,7 @@ defmodule PlasmaUiWeb.Entity.Create do
 
   use Surface.LiveView
   alias Surface.Components.Form
+  alias PlasmaUiWeb.Components.Nav
   alias PlasmaUiWeb.Components.Form.{EntityDetails}
   alias PlasmaUiWeb.Helpers.Entity
   alias PlasmaUiWeb.Helpers.Store
@@ -12,10 +13,10 @@ defmodule PlasmaUiWeb.Entity.Create do
 
   def render(assigns) do
     ~F"""
+    <Nav />
     <section>
       <h2>Create Entity</h2>
       <article>
-        <p>Use this form to create a new entity.</p>
         <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing={false} />
           <button type="submit">Create Entity</button>

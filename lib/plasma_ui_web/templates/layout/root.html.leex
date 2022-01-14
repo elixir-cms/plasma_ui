@@ -10,20 +10,6 @@
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li>
-              <%= live_patch "Home", to: Routes.live_path(@conn, :index) %>
-            </li>
-            <li>
-              <%= live_patch "Create Entity", to: Routes.live_path(@conn, PlasmaUiWeb.Entity.Create) %>
-            </li>
-          </ul>
-        </nav>
-      </section>
-    </header>
     <%= @inner_content %>
   </body>
 </html>

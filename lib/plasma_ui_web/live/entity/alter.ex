@@ -6,13 +6,14 @@ defmodule PlasmaUiWeb.Entity.Alter do
   use Surface.LiveView
   alias EctoEntity.Type
   alias Surface.Components.Form
-  alias PlasmaUiWeb.Components.{Accordion, Modal}
+  alias PlasmaUiWeb.Components.{Accordion, Modal, Nav}
   alias PlasmaUiWeb.Components.Form.{EntityDetails, EntityField, NewField}
   alias PlasmaUiWeb.Helpers.Entity, as: EntityHelper
   alias PlasmaUiWeb.Helpers.Store
 
   def render(assigns) do
     ~F"""
+    <Nav />
     <section>
       <p class="alert alert-info" role="alert"
          phx-click="lv:clear-flash"
@@ -23,7 +24,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
          phx-value-key="error">{ live_flash(@flash, :error) }</p>
       <article id="alter" phx-hook="Alter">
         <h2>Alter Entity - {@entity.label}</h2>
-        <p>Use this form to alter entity details and fields associated with the entity.</p>
         <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing />
           <fieldset class="border pb-6" form="entity" name="entity[:fields]">
@@ -116,7 +116,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
         indexed: false,
         unique: true,
         required: true
-        # length: %{max: 200}
       )
 
     new_socket =

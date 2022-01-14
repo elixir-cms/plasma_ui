@@ -4,15 +4,15 @@ defmodule PlasmaUiWeb.Entity.List do
   """
 
   use Surface.LiveView
-  alias PlasmaUiWeb.Components.{Column, DataTable}
+  alias PlasmaUiWeb.Components.{Column, DataTable, Nav}
   alias PlasmaUiWeb.Helpers.Store
 
   def render(assigns) do
     ~F"""
+    <Nav />
     <section>
       <article>
         <h2>Entities</h2>
-        <p>The table below shows a list of all available entities. Click on an entity title to alter it.</p>
         <DataTable items={@entities}>
           <Column field="label" />
           <Column field="source" />
