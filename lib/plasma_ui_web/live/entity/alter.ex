@@ -98,6 +98,10 @@ defmodule PlasmaUiWeb.Entity.Alter do
     Keyword.merge(acc, keyword)
   end
 
+  def handle_info(:clear_flash, socket) do
+    {:noreply, socket |> clear_flash}
+  end
+
   def handle_event(
         "add_field",
         %{
@@ -122,7 +126,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
       socket
       |> assign(:entity, new_entity)
       |> put_flash(:info, "Field added!")
-      |> push_event("scrollToTop", %{})
 
     {:noreply, new_socket}
   end
@@ -187,10 +190,6 @@ defmodule PlasmaUiWeb.Entity.Alter do
     Process.send_after(self(), :clear_flash, 3000, [])
 
     {:noreply, new_socket}
-  end
-
-  def handle_info(:clear_flash, socket) do
-    {:noreply, socket |> clear_flash}
   end
 
   def handle_event("blur", val, socket) do
