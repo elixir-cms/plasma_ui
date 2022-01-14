@@ -42,6 +42,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
             <div class="flex float-right justify-end w-8" style="transform: translateY(-100%)">
               <div
                 class="button mt-4"
+                id="add-field"
                 @click="setTimeout(() => document.getElementById('new_field_field_name').focus(), 400)"
               >
                 Add field
