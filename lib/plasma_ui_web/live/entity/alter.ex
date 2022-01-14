@@ -131,60 +131,61 @@ defmodule PlasmaUiWeb.Entity.Alter do
   def handle_event("submit", _, socket) do
     type = socket.assigns.entity
 
-    socket.assigns.changes
-    |> Enum.reduce(%{}, fn change, acc ->
-      fieldname = change[:fieldname]
-      existing_changes = acc[fieldname]
-      new_change = Map.delete(change, :fieldname)
+    {:ok, entity} =
+      socket.assigns.changes
+      |> Enum.reduce(%{}, fn change, acc ->
+        fieldname = change[:fieldname]
+        existing_changes = acc[fieldname]
+        new_change = Map.delete(change, :fieldname)
 
-      if is_list(existing_changes) do
-        field_changes = Map.put(%{}, fieldname, Enum.concat(existing_changes, [new_change]))
-        Map.merge(acc, field_changes)
-      else
-        Map.put(acc, fieldname, [new_change])
-      end
-    end)
-    |> Enum.map(fn {fieldname, field_changes} ->
-      changeset =
-        field_changes
-        |> Enum.reduce(Keyword.new(), fn %{key: _, subkey: subkey, value: value}, acc ->
-          case subkey do
-            :primary_key ->
-              IO.puts("unhandled :primary_key change to #{value}")
-              acc
+        if is_list(existing_changes) do
+          field_changes = Map.put(%{}, fieldname, Enum.concat(existing_changes, [new_change]))
+          Map.merge(acc, field_changes)
+        else
+          Map.put(acc, fieldname, [new_change])
+        end
+      end)
+      |> Enum.map(fn {fieldname, field_changes} ->
+        changeset =
+          field_changes
+          |> Enum.reduce(Keyword.new(), fn %{key: _, subkey: subkey, value: value}, acc ->
+            case subkey do
+              :primary_key ->
+                IO.puts("unhandled :primary_key change to #{value}")
+                acc
 
-            :indexed ->
-              if clean_val(value),
-                do: merge_key(acc, :add_index, true),
-                else: merge_key(acc, :drop_index, true)
+              :indexed ->
+                if clean_val(value),
+                  do: merge_key(acc, :add_index, true),
+                  else: merge_key(acc, :drop_index, true)
 
-            :nullable ->
-              merge_key(acc, :make_nullable, value)
+              :nullable ->
+                merge_key(acc, :make_nullable, value)
 
-            :unique ->
-              merge_key(acc, :remove_uniqueness, value)
+              :unique ->
+                merge_key(acc, :remove_uniqueness, value)
 
-            :default ->
-              merge_key(acc, :set_default, value)
+              :default ->
+                merge_key(acc, :set_default, value)
 
-            _ ->
-              merge_key(acc, subkey, value)
-          end
-        end)
+              _ ->
+                merge_key(acc, subkey, value)
+            end
+          end)
 
-      {fieldname, changeset}
-    end)
-    |> Enum.reduce(type, fn {fieldname, changeset}, acc ->
-      Type.alter_field!(acc, fieldname, changeset)
-    end)
-    |> Store.put_type()
+        {fieldname, changeset}
+      end)
+      |> Enum.reduce(type, fn {fieldname, changeset}, acc ->
+        Type.alter_field!(acc, fieldname, changeset)
+      end)
+      |> Store.put_type()
 
     new_socket =
       socket
+      |> assign(:entity, entity)
       |> put_flash(:info, "Entity updated!")
-      |> push_event("scrollToTop", %{})
 
-    Process.send_after(self(), :clear_flash, 5000, [])
+    Process.send_after(self(), :clear_flash, 3000, [])
 
     {:noreply, new_socket}
   end
