@@ -57,3 +57,28 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
+
+// tailwind toggle-switch
+window.addEventListener('DOMContentLoaded', function () {
+  for (let tabindex of document.querySelectorAll(
+    '.toggle-switch [tabindex="0"]'
+  )) {
+    tabindex.addEventListener('keyup', (e) => {
+      if (e.keyCode == 32) e.target.click()
+    })
+  }
+  for (let toggle of document.querySelectorAll(
+    '.toggle-switch input[type="checkbox"]'
+  )) {
+    toggle.addEventListener('change', () => {
+      toggle.dispatchEvent(
+        new CustomEvent('new-value', {
+          detail: {
+            id: toggle.id,
+            value: toggle.checked
+          }
+        })
+      )
+    })
+  }
+})

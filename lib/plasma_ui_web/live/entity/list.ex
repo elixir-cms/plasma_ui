@@ -6,15 +6,23 @@ defmodule PlasmaUiWeb.Entity.List do
   use Surface.LiveView
   alias PlasmaUiWeb.Components.{Column, DataTable, Nav}
   alias PlasmaUiWeb.Helpers.Store
+  alias Surface.Components.LivePatch
 
   def render(assigns) do
     ~F"""
     <Nav />
     <section>
       <article>
-        <h2>Entities</h2>
-        <DataTable items={@entities}>
-          <Column field="label" />
+        <h2 class="float-left">Entities</h2>
+        <LivePatch class="button float-right" to="/entity/create">Create Entity</LivePatch>
+        <DataTable
+          items={@entities}
+          link_key={:label}
+          path_param={:source}
+          path_prefix="entity"
+          path_suffix="alter"
+        >
+          <Column field="label" field_filter={&Function.identity/1} />
           <Column field="source" />
           <Column field="singular" />
           <Column field="plural" />

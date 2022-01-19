@@ -14,7 +14,10 @@ defmodule PlasmaUiWeb.Components.Modal do
       <div class="trigger" @click="showModal = true">
         <#slot name="trigger" />
       </div>
-      <div class="content fixed flex inset-0 items-center justify-center min-h-screen" x-show="showModal">
+      <div
+        class="content fixed flex inset-0 items-center justify-center min-h-screen"
+        x-show="showModal"
+      >
         <div
           @click="showModal = false"
           class="overlay absolute bg-black bg-opacity-50 inset-0 z-40"

@@ -13,6 +13,26 @@ defmodule PlasmaUiWeb.Routes do
         name: "Alter Entity",
         path: "/entity/:source/alter",
         module: Entity.Alter
+      },
+      %{
+        name: "Content Overview",
+        path: "/content",
+        module: Content.Overview
+      },
+      %{
+        name: "List Content",
+        path: "/content/:source",
+        module: Content.List
+      },
+      %{
+        name: "Create Content",
+        path: "/content/:source/create",
+        module: Content.Create
+      },
+      %{
+        name: "Edit Content",
+        path: "/content/:source/:id/edit",
+        module: Content.Edit
       }
     ]
   end

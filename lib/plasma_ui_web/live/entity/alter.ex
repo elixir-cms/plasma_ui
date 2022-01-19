@@ -15,13 +15,9 @@ defmodule PlasmaUiWeb.Entity.Alter do
     ~F"""
     <Nav />
     <section>
-      <p class="alert alert-info" role="alert"
-         phx-click="lv:clear-flash"
-         phx-value-key="info">{ live_flash(@flash, :info) }</p>
+      <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">{live_flash(@flash, :info)}</p>
 
-      <p class="alert alert-danger" role="alert"
-         phx-click="lv:clear-flash"
-         phx-value-key="error">{ live_flash(@flash, :error) }</p>
+      <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">{live_flash(@flash, :error)}</p>
       <article id="alter" phx-hook="Alter">
         <h2>Alter Entity - {@entity.label}</h2>
         <Form for={:entity} submit="submit" opts={id: "entity"}>

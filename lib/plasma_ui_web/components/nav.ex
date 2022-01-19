@@ -13,10 +13,10 @@ defmodule PlasmaUiWeb.Components.Nav do
         <nav role="navigation">
           <ul>
             <li>
-              <LivePatch to="/">Entities</LivePatch>
+              <LivePatch to="/content">Content</LivePatch>
             </li>
             <li>
-              <LivePatch to="/entity/create">Create Entity</LivePatch>
+              <LivePatch to="/">Entities</LivePatch>
             </li>
           </ul>
         </nav>

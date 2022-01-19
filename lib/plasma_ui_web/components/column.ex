@@ -1,5 +1,5 @@
 defmodule PlasmaUiWeb.Components.Column do
-  use Surface.Component, slot: "cols"
+  use Surface.Component, slot: "columns"
 
   @moduledoc """
   A column component for use with the DataTable component.
@@ -9,5 +9,8 @@ defmodule PlasmaUiWeb.Components.Column do
   prop(field, :string, required: true)
 
   @doc "A function to filter the output of the field"
-  prop(filter, :fun, default: &Function.identity/1)
+  prop(field_filter, :fun, default: &Function.identity/1)
+
+  @doc "A function to filter the output of the label"
+  prop(label_filter, :fun, default: &Phoenix.Naming.humanize/1)
 end
