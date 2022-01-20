@@ -12,7 +12,7 @@ defmodule PlasmaUiWeb.Content.Create do
     <Nav />
     <section>
       <article>
-        <h2>Create {@entity.singular |> Phoenix.Naming.humanize()}</h2>
+        <h3>Create {@entity.singular |> Phoenix.Naming.humanize()}</h3>
       </article>
     </section>
     """

@@ -1,0 +1,27 @@
+.date-picker {
+  padding-top: 4px;
+  position: relative;
+  .calendar-icon {
+    position: absolute;
+    left: 5px;
+    opacity: 0.7;
+    top: 16px;
+  }
+  input.sibling {
+    color: var(--lumo-body-text-color);
+    font-family: var(--lumo-font-family);
+    font-size: var(--lumo-font-size-s);
+    font-weight: 500;
+    padding-left: 30px;
+    &::placeholder {font-weight: normal;}
+  }
+  .flatpickr {
+    pointer-events: none;
+    visibility: hidden;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: -0.425rem;
+    height: 100%;
+  }
+}

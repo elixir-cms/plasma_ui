@@ -1,0 +1,41 @@
+input[type='email'],input[type='number'],input[type='password'],input[type='search'],input[type='tel'],input[type='text'],input[type='url'],textarea,select{
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+  background-color: #1a39601a;
+  border:0.1rem solid #d1d1d1;
+  border-radius:.4rem;
+  box-shadow:none;
+  box-sizing:inherit;
+  margin-bottom: 0.85rem;
+  padding: 0.75rem;
+  transition: background-color 150ms ease-out;
+  width:100%;
+  &:hover {
+    background-color: #dce1e7;
+    transition: background-color 150ms ease-in;
+  }
+}
+input[type='email']:focus,input[type='number']:focus,input[type='password']:focus,input[type='search']:focus,input[type='tel']:focus,input[type='text']:focus,input[type='url']:focus,textarea:focus,select:focus{
+  border-color:#0069d9;
+  outline:0
+}
+textarea{
+  min-height:6.5rem
+}
+label,legend{
+  display:block;
+  font-size:1.1rem;
+  font-weight:700;
+  margin-bottom:.25rem
+}
+fieldset{
+  border-width:0;
+  padding:0
+}
+input[type='checkbox'],input[type='radio']{
+  display:inline
+}
+input[type="checkbox"] + label { @apply cursor-pointer font-normal inline }
+[readonly] { @apply cursor-not-allowed }
+select[readonly] { @apply pointer-events-none }

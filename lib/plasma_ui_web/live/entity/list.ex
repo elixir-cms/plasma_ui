@@ -13,7 +13,7 @@ defmodule PlasmaUiWeb.Entity.List do
     <Nav />
     <section>
       <article>
-        <h2 class="float-left">Entities</h2>
+        <h3 class="float-left">Entities</h3>
         <LivePatch class="button float-right" to="/entity/create">Create Entity</LivePatch>
         <DataTable
           items={@entities}

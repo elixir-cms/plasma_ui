@@ -1,0 +1,14 @@
+.toggle-switch label {
+  font-size: 1rem;
+  font-weight: normal;
+  margin-bottom: 0;
+}
+.toggle-switch input[type="checkbox"] {display: none;}
+.toggle-path {transition: background 0.3s ease-in-out;}
+.toggle-circle {
+  left: 0.25rem;
+  top: 0.15rem;
+  transition: all 0.3s ease-in-out;
+}
+input:checked ~ .toggle-circle {transform: translateX(100%);}
+input:checked ~ .toggle-path {background: #31708f;}

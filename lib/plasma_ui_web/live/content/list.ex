@@ -12,7 +12,7 @@ defmodule PlasmaUiWeb.Content.List do
     <Nav />
     <section>
       <article>
-        <h2>{@entity.plural |> Phoenix.Naming.humanize()}</h2>
+        <h3>{@entity.plural |> Phoenix.Naming.humanize()}</h3>
         <DataTable
           items={@entries}
           link_key={:label}

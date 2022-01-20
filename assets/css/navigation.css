@@ -1,0 +1,5 @@
+/* Navigation */
+.container nav { width: 100%; }
+.container nav a { color: #0069d9 !important; border-color: transparent; }
+.container nav ul { text-align: center; }
+.container nav ul li { @apply inline-block mx-4 }

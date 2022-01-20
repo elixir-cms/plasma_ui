@@ -1,0 +1,7 @@
+html { @apply bg-white }
+section {
+  @apply container py-4;
+  margin: 0 auto;
+  max-width: 768px;
+}
+section article { @apply px-8 lg:px-0; }
