@@ -15,7 +15,7 @@ defmodule PlasmaUiWeb.Entity.Create do
     ~F"""
     <Nav />
     <section>
-      <h2>Create Entity</h2>
+      <h3>Create Entity</h3>
       <article>
         <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing={false} />

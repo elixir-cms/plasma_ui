@@ -14,7 +14,7 @@ defmodule PlasmaUiWeb.Content.Overview do
     <Nav />
     <section>
       <article>
-        <h2>Content</h2>
+        <h3>Content</h3>
         <DataTable items={@entities} link_key={:label} path_prefix="content" path_param={:source}>
           <Column field="label" />
           <Column field="source" />

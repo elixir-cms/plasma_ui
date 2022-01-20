@@ -1,5 +1,15 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import "phoenix";
-@import "styles";
+@import "typography";
+@import "layout";
+@import "navigation";
+@import "alerts";
+@import "buttons";
+@import "date-picker";
+@import "forms";
+@import "flatpickr/dist/flatpickr.min.css";
+@import "inputs";
+@import "live-view";
+@import "tables";
+@import "toggle-switch";

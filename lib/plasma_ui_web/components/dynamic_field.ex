@@ -5,28 +5,33 @@ defmodule PlasmaUiWeb.Components.DynamicField do
 
   use Surface.Component
   alias Surface.Components.Form.TextInput
+  alias PlasmaUiWeb.Components.DatePicker
   alias PlasmaUiWeb.Components.ToggleSwitch
 
   @doc "The field name"
-  prop(name, :string, required: true)
+  prop(fieldName, :string, required: true)
 
   @doc "The type of field to display input for"
-  prop(type, :string, required: true)
+  prop(fieldType, :string, required: true)
 
   @doc "The value of the field"
   prop(value, :any, required: true)
 
   def render(assigns) do
     ~F"""
-    {#case @type}
+    {#case @fieldType}
       {#match "boolean"}
-        <ToggleSwitch label={@name} value={@value} changeEvent={"#{Phoenix.Naming.underscore(@name)}_change"} />
+        <ToggleSwitch
+          changeEvent={@fieldName}
+          fieldName={@fieldName}
+          value={@value}
+        />
       {#match "string"}
-        <TextInput />
+        <TextInput blur={@fieldName} opts={placeholder: "#{@fieldName |> Phoenix.Naming.humanize()}"} value={@value} />
       {#match "naive_datetime"}
-        datetime
+        <DatePicker fieldName={"#{@fieldName}"} value={@value} />
       {#match _}
-        Unrecognized field_type: "{@type}"
+        <strong>Unrecognized field_type: "{@fieldType}"</strong>
     {/case}
     """
   end
