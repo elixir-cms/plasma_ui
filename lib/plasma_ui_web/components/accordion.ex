@@ -6,6 +6,7 @@ defmodule PlasmaUiWeb.Components.Accordion do
   """
 
   use Surface.Component
+  alias Phoenix.LiveView.JS
 
   slot(default, required: true)
 
@@ -14,13 +15,16 @@ defmodule PlasmaUiWeb.Components.Accordion do
   prop(title, :string, required: true)
 
   def(render(assigns)) do
+    id = "accordion-" <> (System.unique_integer([:positive, :monotonic]) |> Integer.to_string())
+
     ~F"""
-    <div class="accordion" style={@style} x-data="{ open: 0 }">
-      <div @click="open = !open" class="flex items-center justify-between bg-gray-200 border p-4 cursor-pointer" @keyup.space="open = !open" tabindex="0">
-        <p>{@title}</p>
-        <span :class="open == 1 ? 'fa-chevron-down' : 'fa-chevron-up'" class="fas" />
+    <div class="accordion" id={id} style={@style} :hook="Accordion">
+      <div class="trigger" :on-click={JS.dispatch("toggle", to: "##{id}")} tabindex="0">
+        <p class="mb-0">{@title}</p>
+        <span class="fas fa-chevron-down hidden" />
+        <span class="fas fa-chevron-up" />
       </div>
-      <div class="content border p-4" x-show="open == 1">
+      <div class="content hidden">
         <#slot />
       </div>
     </div>

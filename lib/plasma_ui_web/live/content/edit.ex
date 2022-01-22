@@ -4,6 +4,7 @@ defmodule PlasmaUiWeb.Content.Edit do
   """
 
   use Surface.LiveView
+  alias PlasmaUiWeb.Components.Alerts
   alias PlasmaUiWeb.Components.DynamicField
   alias PlasmaUiWeb.Components.Nav
   alias PlasmaUiWeb.Helpers.Content
@@ -14,8 +15,7 @@ defmodule PlasmaUiWeb.Content.Edit do
     ~F"""
     <Nav />
     <section>
-      <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">{live_flash(@flash, :info)}</p>
-      <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">{live_flash(@flash, :error)}</p>
+      <Alerts flash={@flash} />
       <article>
         <h3>Edit {@entity.singular |> Phoenix.Naming.humanize()}</h3>
         <Form for={:entry} submit="submit" opts={id: "entry"}>
@@ -23,7 +23,11 @@ defmodule PlasmaUiWeb.Content.Edit do
             <legend>Fields</legend>
             <div class="mb-4" :for={key <- Map.keys(@entity.fields)} }>
               <label>{key |> Phoenix.Naming.humanize()}</label>
-              <DynamicField fieldName={key} fieldType={@entity.fields[key].field_type} value={@entry[key |> String.to_atom()]} />
+              <DynamicField
+                fieldName={key}
+                fieldType={@entity.fields[key].field_type}
+                value={@entry[key |> String.to_atom()]}
+              />
             </div>
           </fieldset>
           <button id="update" type="submit">Update</button>

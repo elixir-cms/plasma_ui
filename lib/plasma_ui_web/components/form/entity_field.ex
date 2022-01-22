@@ -59,6 +59,7 @@ defmodule PlasmaUiWeb.Components.Form.EntityField do
         value={EntityHelper.map_value?(@field.persistence_options, :indexed)}
       />
       <Label field={"fields_#{@name}_persistence_options_indexed"} text="Enable Sorting & Filtering" />
+      <br /><br />
       <Label text="Advanced Options" />
       <Accordion title="Persistence options">
         <PersistenceOptions parent_name={@name} options={@field.persistence_options} />

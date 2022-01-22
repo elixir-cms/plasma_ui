@@ -10,12 +10,12 @@ defmodule PlasmaUiWeb.Components.Nav do
     ~F"""
     <header>
       <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li>
+        <nav role="navigation" class="w-full">
+          <ul class="text-center">
+            <li class="inline-block mx-4">
               <LivePatch to="/content">Content</LivePatch>
             </li>
-            <li>
+            <li class="inline-block mx-4">
               <LivePatch to="/">Entities</LivePatch>
             </li>
           </ul>

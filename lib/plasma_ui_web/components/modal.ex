@@ -4,41 +4,39 @@ defmodule PlasmaUiWeb.Components.Modal do
   """
 
   use Surface.Component
+  alias Phoenix.LiveView.JS
+
+  prop(id, :string)
+
+  prop(callbackId, :string)
 
   slot(trigger, required: true)
+
   slot(content, required: true)
 
   def(render(assigns)) do
+    id =
+      if assigns.id,
+        do: assigns.id,
+        else: "modal-" <> (System.unique_integer([:positive, :monotonic]) |> Integer.to_string())
+
     ~F"""
-    <div class="modal" @keydown.escape.window="showModal = false" x-data="{ 'showModal': false }">
-      <div class="trigger" @click="showModal = true">
+    <div class="modal" id={id} :hook="Modal">
+      <div class="trigger"
+           :on-click={
+             JS.dispatch("open", to: "##{id}")
+             |> JS.dispatch("opened", to: "##{@callbackId}")
+           }
+        tabindex="0">
         <#slot name="trigger" />
       </div>
-      <div
-        class="content fixed flex inset-0 items-center justify-center min-h-screen"
-        x-show="showModal"
-      >
-        <div
-          @click="showModal = false"
-          class="overlay absolute bg-black bg-opacity-50 inset-0 z-40"
-          x-show="showModal"
-          x-transition:enter="transition ease-out duration-200"
-          x-transition:enter-start="opacity-0"
-          x-transition:enter-end="opacity-100"
-          x-transition:leave="transition ease-in duration-200"
-          x-transition:leave-start="opacity-100"
-          x-transition:leave-end="opacity-0"
-        />
-        <div
-          class="bg-white px-8 py-6 max-w-4xl md:min-w-1/2 rounded-2xl shadow-lg z-50"
-          x-show="showModal"
-          x-transition:enter="transition ease-out duration-300 delay-100"
-          x-transition:enter-start="opacity-0 transform scale-90"
-          x-transition:enter-end="opacity-100 transform scale-100"
-          x-transition:leave="transition ease-in duration-300 delay-100"
-          x-transition:leave-start="opacity-100 transform scale-100"
-          x-transition:leave-end="opacity-0 transform scale-90"
-        >
+      <div class="hidden wrapper">
+        <div class="overlay"
+             :on-click={
+               JS.dispatch("close", to: "##{id}")
+               |> JS.dispatch("closed", to: "##{@callbackId}")
+             } />
+        <div class="content">
           <#slot name="content" />
         </div>
       </div>

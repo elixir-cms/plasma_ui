@@ -1,0 +1,16 @@
+.accordion {
+  > .trigger { @apply bg-gray-200 border cursor-pointer flex items-center justify-between p-4 }
+  > .content {
+    @apply border max-h-0 opacity-0 overflow-hidden py-0;
+    transition: max-height 300ms ease-out, opacity 200ms ease-out, padding 0ms linear 300ms;
+  }
+  &.expanded {
+    > .content {
+      @apply opacity-100 p-4;
+      max-height: 9999px;
+      transition: max-height 300ms ease-in, opacity 200ms ease-in;
+    }
+    .fa-chevron-down { @apply block }
+    .fa-chevron-up { @apply hidden }
+  }
+}

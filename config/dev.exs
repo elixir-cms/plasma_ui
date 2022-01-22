@@ -38,6 +38,7 @@ config :plasma_ui, PlasmaUiWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :plasma_ui, PlasmaUiWeb.Endpoint,
+  reloadable_compilers: [:phoenix, :elixir, :surface],
   live_reload: [
     patterns: [
       ~r"priv/catalogue/.*(ex)$",
@@ -45,7 +46,8 @@ config :plasma_ui, PlasmaUiWeb.Endpoint,
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/plasma_ui_web/(live|views)/.*(ex)$",
-      ~r"lib/plasma_ui_web/templates/.*(eex)$"
+      ~r"lib/plasma_ui_web/templates/.*(eex)$",
+      ~r"lib/plasma_ui_web/(components|live)/.*(js)$"
     ]
   ]
 

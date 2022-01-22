@@ -7,7 +7,9 @@ module.exports = {
     './js/**/*.js'
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: { height: 'height' }
+    },
     minWidth: {
       0: '0',
       '1/4': '25%',

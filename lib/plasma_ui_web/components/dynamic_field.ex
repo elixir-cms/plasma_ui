@@ -21,13 +21,13 @@ defmodule PlasmaUiWeb.Components.DynamicField do
     ~F"""
     {#case @fieldType}
       {#match "boolean"}
-        <ToggleSwitch
-          changeEvent={@fieldName}
-          fieldName={@fieldName}
+        <ToggleSwitch changeEvent={@fieldName} fieldName={@fieldName} value={@value} />
+      {#match "string"}
+        <TextInput
+          blur={@fieldName}
+          opts={placeholder: "#{@fieldName |> Phoenix.Naming.humanize()}"}
           value={@value}
         />
-      {#match "string"}
-        <TextInput blur={@fieldName} opts={placeholder: "#{@fieldName |> Phoenix.Naming.humanize()}"} value={@value} />
       {#match "naive_datetime"}
         <DatePicker fieldName={"#{@fieldName}"} value={@value} />
       {#match _}

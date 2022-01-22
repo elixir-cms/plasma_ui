@@ -6,18 +6,21 @@ defmodule PlasmaUiWeb.Entity.Alter do
   use Surface.LiveView
   alias EctoEntity.Type
   alias Surface.Components.Form
-  alias PlasmaUiWeb.Components.{Accordion, Modal, Nav}
+  alias PlasmaUiWeb.Components.Accordion
+  alias PlasmaUiWeb.Components.Alerts
+  alias PlasmaUiWeb.Components.Modal
+  alias PlasmaUiWeb.Components.Nav
   alias PlasmaUiWeb.Components.Form.{EntityDetails, EntityField, NewField}
   alias PlasmaUiWeb.Helpers.Entity, as: EntityHelper
   alias PlasmaUiWeb.Helpers.Store
+  alias Phoenix.LiveView.JS
 
   def render(assigns) do
     ~F"""
     <Nav />
     <section>
-      <p class="alert alert-info" role="alert" phx-click="lv:clear-flash" phx-value-key="info">{live_flash(@flash, :info)}</p>
-      <p class="alert alert-danger" role="alert" phx-click="lv:clear-flash" phx-value-key="error">{live_flash(@flash, :error)}</p>
-      <article id="alter" phx-hook="Alter">
+      <Alerts flash={@flash} />
+      <article id="alter" :hook="Alter">
         <h3>Alter {@entity.label}</h3>
         <Form for={:entity} submit="submit" opts={id: "entity"}>
           <EntityDetails entity={@entity} editing />
@@ -32,14 +35,10 @@ defmodule PlasmaUiWeb.Entity.Alter do
           </fieldset>
           <button id="update-entity" type="submit">Update Entity</button>
         </Form>
-        <Modal>
+         <Modal id="add-field-modal" callbackId="alter">
           <:trigger>
             <div class="flex float-right justify-end w-8" style="transform: translateY(-100%)">
-              <div
-                class="button mt-4"
-                id="add-field"
-                @click="setTimeout(() => document.getElementById('new_field_field_name').focus(), 400)"
-              >
+              <div class="button mt-4" id="add-field">
                 Add field
               </div>
             </div>
@@ -47,8 +46,12 @@ defmodule PlasmaUiWeb.Entity.Alter do
           <:content>
             <Form for={:new_field} submit="add_field" opts={id: "new_field"}>
               <NewField field={@new_field} />
-              <button @click="showModal = false" type="submit">Add field</button>
-              <div class="button gray" @click="showModal = false">Cancel</div>
+              <button type="submit">Add field</button>
+              <button class="gray"
+                      type="button"
+                      :on-click={JS.dispatch("close", to: "#add-field-modal")}>
+                Cancel
+              </button>
             </Form>
           </:content>
         </Modal>
@@ -123,6 +126,8 @@ defmodule PlasmaUiWeb.Entity.Alter do
       |> assign(:entity, new_entity)
       |> put_flash(:info, "Field added!")
 
+    JS.dispatch("close", to: "#add-field-modal")
+
     {:noreply, new_socket}
   end
 
@@ -183,7 +188,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
       |> assign(:entity, entity)
       |> put_flash(:info, "Entity updated!")
 
-    Process.send_after(self(), :clear_flash, 3000, [])
+    # Process.send_after(self(), :clear_flash, 3000, [])
 
     {:noreply, new_socket}
   end

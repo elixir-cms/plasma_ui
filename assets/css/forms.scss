@@ -1,11 +1,7 @@
 /* Forms */
 form { margin-bottom: 0; }
 form > fieldset { @apply mb-4 p-8 }
-form > fieldset > input {
-  border: 1px solid #EEE;
-  border-radius: 3px;
-  width: 100%;
-}
+form > fieldset > input { @apply border-2 border-gray-500 rounded w-full }
 form > fieldset > input[style*="background-image: url"] {
   filter: none !important;
   -webkit-filter: none !important;

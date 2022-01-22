@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 @import "typography";
 @import "layout";
-@import "navigation";
+@import "accordion";
 @import "alerts";
 @import "buttons";
 @import "date-picker";
@@ -11,5 +11,6 @@
 @import "flatpickr/dist/flatpickr.min.css";
 @import "inputs";
 @import "live-view";
+@import "modal";
 @import "tables";
 @import "toggle-switch";

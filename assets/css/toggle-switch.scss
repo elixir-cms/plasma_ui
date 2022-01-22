@@ -4,10 +4,12 @@
   margin-bottom: 0;
 }
 .toggle-switch input[type="checkbox"] {display: none;}
-.toggle-path {transition: background 0.3s ease-in-out;}
+.toggle-path {
+  background: #ff5757;
+  transition: background 0.3s ease-in-out;}
 .toggle-circle {
   left: 0.25rem;
-  top: 0.15rem;
+  top: 0.175rem;
   transition: all 0.3s ease-in-out;
 }
 input:checked ~ .toggle-circle {transform: translateX(100%);}

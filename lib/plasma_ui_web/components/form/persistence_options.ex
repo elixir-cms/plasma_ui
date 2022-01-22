@@ -53,7 +53,7 @@ defmodule PlasmaUiWeb.Components.Form.PersistenceOptions do
         value={EntityHelper.map_value?(@options, :unique)}
       />
       <Label field={"fields_#{@parent_name}_persistence_options_unique"} text="Unique" />
-      <br>
+      <br /><br />
       <Label text="Default" />
       <TextInput
         id={"entity_fields_#{@parent_name}_persistence_options_default"}
