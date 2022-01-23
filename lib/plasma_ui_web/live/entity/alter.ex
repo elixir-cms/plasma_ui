@@ -188,7 +188,7 @@ defmodule PlasmaUiWeb.Entity.Alter do
       |> assign(:entity, entity)
       |> put_flash(:info, "Entity updated!")
 
-    # Process.send_after(self(), :clear_flash, 3000, [])
+    Process.send_after(self(), :clear_flash, 3000, [])
 
     {:noreply, new_socket}
   end
@@ -198,9 +198,9 @@ defmodule PlasmaUiWeb.Entity.Alter do
     field = socket.assigns.entity.fields["#{fieldname}"]
 
     if is_map(field) do
-      key = String.to_atom(val["key"])
+      key = String.to_existing_atom(val["key"])
       field_key = field |> Map.fetch(key) |> elem(1)
-      subkey = String.to_atom(val["subkey"])
+      subkey = String.to_existing_atom(val["subkey"])
       value = val["value"]
 
       cond do

@@ -23,7 +23,7 @@ defmodule PlasmaUiWeb.Helpers.Content do
             raise "Unrecognized field_type: #{entity.fields[key].field_type}"
         end
 
-      Map.put(acc, key |> String.to_atom(), value)
+      Map.put(acc, key, value)
     end)
   end
 end

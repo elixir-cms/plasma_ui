@@ -67,7 +67,7 @@ defmodule PlasmaUiWeb.Components.DataTable do
       <tbody>
         {#for item <- @items}
           <tr>
-            {#for column <- @columns, field = String.to_atom(column.field), item = ensure_map(item)}
+            {#for column <- @columns, field = String.to_existing_atom(column.field), item = ensure_map(item)}
               <td>
                 {#if field == @link_key}
                   <LivePatch to={"/" <>

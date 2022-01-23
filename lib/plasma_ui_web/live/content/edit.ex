@@ -26,7 +26,7 @@ defmodule PlasmaUiWeb.Content.Edit do
               <DynamicField
                 fieldName={key}
                 fieldType={@entity.fields[key].field_type}
-                value={@entry[key |> String.to_atom()]}
+                value={@entry[key]}
               />
             </div>
           </fieldset>
@@ -55,7 +55,7 @@ defmodule PlasmaUiWeb.Content.Edit do
         %{"field_name" => field_name, "field_type" => "boolean", "value" => value},
         socket
       ) do
-    new_entry = socket.assigns.entry |> Map.replace!(field_name |> String.to_atom(), value)
+    new_entry = socket.assigns.entry |> Map.replace!(field_name, value)
     {:noreply, socket |> assign(:entry, new_entry)}
   end
 
@@ -64,7 +64,7 @@ defmodule PlasmaUiWeb.Content.Edit do
         %{"field_name" => field_name, "field_type" => "naive_datetime", "value" => value},
         socket
       ) do
-    new_entry = socket.assigns.entry |> Map.replace!(field_name |> String.to_atom(), value)
+    new_entry = socket.assigns.entry |> Map.replace!(field_name, value)
     {:noreply, socket |> assign(:entry, new_entry)}
   end
 
@@ -85,12 +85,12 @@ defmodule PlasmaUiWeb.Content.Edit do
         _ -> value
       end
 
-    new_entry = socket.assigns.entry |> Map.replace!(field_name |> String.to_atom(), new_value)
+    new_entry = socket.assigns.entry |> Map.replace!(field_name, new_value)
     {:noreply, socket |> assign(:entry, new_entry)}
   end
 
   def handle_event(field_name, %{}, socket) do
-    new_entry = socket.assigns.entry |> Map.replace!(field_name |> String.to_atom(), false)
+    new_entry = socket.assigns.entry |> Map.replace!(field_name, false)
     {:noreply, socket |> assign(:entry, new_entry)}
   end
 

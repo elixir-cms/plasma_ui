@@ -7,26 +7,26 @@ defmodule PlasmaUiWeb.Helpers.Entity do
     cond do
       key == "filters" ->
         if value[key] == "" do
-          Map.put(acc, String.to_atom(key), [])
+          Map.put(acc, String.to_existing_atom(key), [])
         else
-          Map.put(acc, String.to_atom(key), value[key])
+          Map.put(acc, String.to_existing_atom(key), value[key])
         end
 
       key == "meta" ->
-        Map.put(acc, String.to_atom(key), value[key])
+        Map.put(acc, String.to_existing_atom(key), value[key])
 
       value[key] == "" ->
         acc
 
       key == "validation_options" ->
         if convert_string_to_atom_keys(value[key]) == %{required: false} do
-          Map.put(acc, String.to_atom(key), %{})
+          Map.put(acc, String.to_existing_atom(key), %{})
         else
-          Map.put(acc, String.to_atom(key), convert_string_to_atom_keys(value[key]))
+          Map.put(acc, String.to_existing_atom(key), convert_string_to_atom_keys(value[key]))
         end
 
       true ->
-        Map.put(acc, String.to_atom(key), convert_string_to_atom_keys(value[key]))
+        Map.put(acc, String.to_existing_atom(key), convert_string_to_atom_keys(value[key]))
     end
   end
 

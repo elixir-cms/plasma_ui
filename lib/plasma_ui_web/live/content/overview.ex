@@ -18,7 +18,6 @@ defmodule PlasmaUiWeb.Content.Overview do
         <DataTable items={@entities} link_key={:label} path_prefix="content" path_param={:source}>
           <Column field="label" />
           <Column field="source" />
-          <Column field="fields" field_filter={fn x -> x |> Map.keys() |> Enum.count() end} />
           <Column field="Entries" field_filter={fn _ -> :rand.uniform(20) end} />
         </DataTable>
       </article>
