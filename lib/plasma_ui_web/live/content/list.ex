@@ -33,6 +33,7 @@ defmodule PlasmaUiWeb.Content.List do
   def mount(params, _session, socket) do
     {:ok, entity} = Store.get_type(params["source"])
     {:ok, example_datetime} = NaiveDateTime.new(2000, 1, 1, 0, 0, 0)
+    String.to_atom("Entries")
 
     entries = [
       %{
