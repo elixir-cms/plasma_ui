@@ -1,17 +1,16 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import (fetchTarball https://github.com/nixos/nixpkgs/archive/nixos-22.05-small.tar.gz) {} }:
 
 with pkgs;
 
 mkShell {
-  name = "elixirShell";
   buildInputs = [
     chromium
     chromedriver
-    erlangR24
-    pkgs.beam.packages.erlangR24.elixir
+    erlangR25
+    elixir
     inotify-tools
+    nodejs-16_x
     postgresql
-    nodejs-12_x
     rebar3
     yarn
   ];
