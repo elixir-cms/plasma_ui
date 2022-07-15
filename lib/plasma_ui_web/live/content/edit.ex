@@ -21,12 +21,12 @@ defmodule PlasmaUiWeb.Content.Edit do
         <Form for={:entry} submit="submit" opts={id: "entry"}>
           <fieldset class="border" form="entry" name="fields">
             <legend>Fields</legend>
-            <div class="mb-4" :for={key <- Map.keys(@entity.fields)} }>
-              <label>{key |> Phoenix.Naming.humanize()}</label>
+            <div class="mb-4" :for={{field_name, field} <- Map.to_list(@entity.fields)} }>
+              <label>{field_name |> Phoenix.Naming.humanize()}</label>
               <DynamicField
-                fieldName={key}
-                fieldType={@entity.fields[key].field_type}
-                value={@entry[key]}
+                fieldName={field_name}
+                fieldType={field.field_type}
+                value={@entry[field_name]}
               />
             </div>
           </fieldset>

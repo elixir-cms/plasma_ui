@@ -6,6 +6,9 @@ defmodule PlasmaUiWeb.Content.List do
   use Surface.LiveView
   alias PlasmaUiWeb.Components.{Column, DataTable, Nav}
   alias PlasmaUiWeb.Helpers.Store
+  alias Surface.Components.LivePatch
+
+  @entries :Entries
 
   def render(assigns) do
     ~F"""
@@ -13,6 +16,9 @@ defmodule PlasmaUiWeb.Content.List do
     <section>
       <article>
         <h3>{@entity.plural |> Phoenix.Naming.humanize()}</h3>
+        <LivePatch class="button float-right" to={"/content/" <> @entity.source <> "/create"}>
+          Add {@entity.singular |> Phoenix.Naming.humanize()}
+        </LivePatch>
         <DataTable
           items={@entries}
           link_key={:label}
@@ -33,7 +39,6 @@ defmodule PlasmaUiWeb.Content.List do
   def mount(params, _session, socket) do
     {:ok, entity} = Store.get_type(params["source"])
     {:ok, example_datetime} = NaiveDateTime.new(2000, 1, 1, 0, 0, 0)
-    String.to_atom("Entries")
 
     entries = [
       %{
@@ -44,7 +49,7 @@ defmodule PlasmaUiWeb.Content.List do
         :updated_at => example_datetime
       },
       %{
-        :label => "Another Exmaple",
+        :label => "Another Example",
         :source => params["source"],
         :id => "1234",
         :created_at => example_datetime,
